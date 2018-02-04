@@ -24,7 +24,11 @@ public class MainFragment extends Fragment {
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
-    FragmentTransaction transaction;
+    private FragmentTransaction transaction;
+
+    private Fragment mFragment;
+
+    private final String TAG_FRAGMENT = "tag";
 
     public MainFragment() {
         // Required empty public constructor
@@ -35,30 +39,32 @@ public class MainFragment extends Fragment {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment currentFragment = getFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
-                    HomeFragment homeFragment = new HomeFragment();
-
-                    transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_inner, homeFragment); // replace a Fragment with Frame Layout
-                    transaction.commit(); // commit the changes
-                    return true;
+                    if (!(currentFragment instanceof HomeFragment)) mFragment = new HomeFragment();
+                    break;
 
                 case R.id.navigation_notifications:
-
-                    NewsFragment newsFragment = new NewsFragment();
-
-                    transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_inner, newsFragment); // replace a Fragment with Frame Layout
-                    transaction.commit(); // commit the changes
-                    return true;
+                    if (!(currentFragment instanceof NewsFragment)) mFragment = new NewsFragment();
+                    break;
             }
-            return false;
+
+            transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT); // replace a Fragment with Frame Layout
+            transaction.commit(); // commit the changes
+
+            return true;
         }
 
     };
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,11 +81,13 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        HomeFragment homeFragment = new HomeFragment();
+        if (savedInstanceState == null) {
+            mFragment = new HomeFragment();
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_inner, homeFragment); // replace a Fragment with Frame Layout
-        transaction.commit(); // commit the changes
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT); // replace a Fragment with Frame Layout
+            transaction.commit(); // commit the changes
+        }
 
         super.onViewCreated(view, savedInstanceState);
     }

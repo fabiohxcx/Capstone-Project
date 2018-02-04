@@ -1,21 +1,26 @@
 package fabiohideki.com.megagenerator.model;
 
+import org.parceler.Parcel;
+
 /**
  * Created by hidek on 03/02/2018.
  */
-
+@Parcel
 public class UltimoResultado {
 
-    private int nroConcurso;
-    private Bolas bolas;
-    private String dataConcurso;
-    private boolean acumulou;
-    private String estPremioProxConc;
-    private String dataProxConc;
-    private String sena;
-    private String quina;
-    private String quadra;
+    int nroConcurso;
+    Bolas bolas;
+    String dataConcurso;
+    boolean acumulou;
+    String estPremioProxConc;
+    String dataProxConc;
+    String sena;
+    String quina;
+    String quadra;
 
+    public UltimoResultado() {
+
+    }
 
     public UltimoResultado(int nroConcurso, Bolas bolas, String dataConcurso, boolean acumulou, String estPremioProxConc, String dataProxConc, String sena, String quina, String quadra) {
         this.nroConcurso = nroConcurso;

@@ -1,19 +1,25 @@
 package fabiohideki.com.megagenerator.model;
 
+import org.parceler.Parcel;
+
 import java.util.Arrays;
 
 /**
  * Created by hidek on 04/02/2018.
  */
-
+@Parcel
 public class Bolas {
 
-    private int bola1;
-    private int bola2;
-    private int bola3;
-    private int bola4;
-    private int bola5;
-    private int bola6;
+    int bola1;
+    int bola2;
+    int bola3;
+    int bola4;
+    int bola5;
+    int bola6;
+
+    public Bolas() {
+
+    }
 
     public Bolas(int bola1, int bola2, int bola3, int bola4, int bola5, int bola6) {
 

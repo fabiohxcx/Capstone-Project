@@ -43,9 +43,11 @@ public class MainActivity extends AppCompatActivity
 
         MainFragment mainFragment = new MainFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame, mainFragment); // replace a Fragment with Frame Layout
-        transaction.commit(); // commit the changes
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame, mainFragment); // replace a Fragment with Frame Layout
+            transaction.commit(); // commit the changes
+        }
 
     }
 
