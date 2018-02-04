@@ -1,3 +1,5 @@
+package fabiohideki.com.megagenerator;
+
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
