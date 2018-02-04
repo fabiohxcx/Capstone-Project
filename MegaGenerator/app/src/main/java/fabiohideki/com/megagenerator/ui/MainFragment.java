@@ -11,8 +11,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
 
 /**
@@ -20,6 +21,7 @@ import fabiohideki.com.megagenerator.R;
  */
 public class MainFragment extends Fragment {
 
+    @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
     FragmentTransaction transaction;
@@ -35,7 +37,6 @@ public class MainFragment extends Fragment {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
 
                     HomeFragment homeFragment = new HomeFragment();
 
@@ -43,15 +44,14 @@ public class MainFragment extends Fragment {
                     transaction.replace(R.id.frame_inner, homeFragment); // replace a Fragment with Frame Layout
                     transaction.commit(); // commit the changes
                     return true;
+
                 case R.id.navigation_notifications:
-                    Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
 
                     NewsFragment newsFragment = new NewsFragment();
 
                     transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.frame_inner, newsFragment); // replace a Fragment with Frame Layout
                     transaction.commit(); // commit the changes
-
                     return true;
             }
             return false;
@@ -65,8 +65,8 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, rootView);
 
-        navigation = rootView.findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         return rootView;

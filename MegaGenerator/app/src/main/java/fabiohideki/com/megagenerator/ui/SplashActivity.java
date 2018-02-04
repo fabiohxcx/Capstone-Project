@@ -1,10 +1,8 @@
-package fabiohideki.com.megagenerator;
+package fabiohideki.com.megagenerator.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import fabiohideki.com.megagenerator.ui.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
