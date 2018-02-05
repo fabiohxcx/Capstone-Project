@@ -38,7 +38,6 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
         super.onStartLoading();
         Log.d(TAG, "onStartLoading: ");
 
-        //TODO Loading indicator visible
         listener.onStartTask();
 
         forceLoad();

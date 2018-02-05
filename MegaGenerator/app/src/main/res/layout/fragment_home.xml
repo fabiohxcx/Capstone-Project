@@ -57,7 +57,7 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/material_text_subhead"
                     android:textStyle="bold"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso" />
 

@@ -13,6 +13,7 @@ public class UltimoResultado {
     @SerializedName("concurso")
     int nroConcurso;
 
+    @SerializedName("resultadoOrdenado")
     String resultado;
 
     @SerializedName("data")
