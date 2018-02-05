@@ -17,6 +17,11 @@
     <string name="card_title_quadra">Quadra - 4 números acertados</string>
     <string name="card_title_concurso">Concurso</string>
     <string name="label_acumulou">Acumulou!</string>
+    <string name="network_error">Erro na conexão</string>
+    <string name="retry">Novamente</string>
+    <string name="checkout_last_result">Veja o último resultado da Mega-Sena</string>
+    <string name="share_via">Compartilhar por</string>
+    <string name="permission_denied">Sem permissão para armazegar imagens</string>
 
 
 </resources>

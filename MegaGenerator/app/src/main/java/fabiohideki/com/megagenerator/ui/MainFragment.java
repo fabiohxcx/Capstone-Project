@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,8 @@ public class MainFragment extends Fragment {
 
     private Fragment mFragment;
 
-    private final String TAG_FRAGMENT = "tag";
+    private final String TAG_FRAGMENT_HOME = "frag_home";
+    private final String TAG_FRAGMENT_NEWS = "frag_news";
 
     public MainFragment() {
         // Required empty public constructor
@@ -40,21 +43,40 @@ public class MainFragment extends Fragment {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            Fragment currentFragment = getFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+            FragmentManager fragmentManager = getFragmentManager();
 
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    if (!(currentFragment instanceof HomeFragment)) mFragment = new HomeFragment();
+
+                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) != null) {
+                        //if the fragment exists, show it.
+                        fragmentManager.beginTransaction().show(fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME)).commit();
+                    } else {
+                        //if the fragment does not exist, add it to fragment manager.
+                        fragmentManager.beginTransaction().add(R.id.frame_inner, new HomeFragment(), TAG_FRAGMENT_HOME).commit();
+                    }
+                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS) != null) {
+                        //if the other fragment is visible, hide it.
+                        fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS)).commit();
+                    }
                     break;
 
                 case R.id.navigation_notifications:
-                    if (!(currentFragment instanceof NewsFragment)) mFragment = new NewsFragment();
+
+                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS) != null) {
+                        //if the fragment exists, show it.
+                        fragmentManager.beginTransaction().show(fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS)).commit();
+                    } else {
+                        //if the fragment does not exist, add it to fragment manager.
+                        fragmentManager.beginTransaction().add(R.id.frame_inner, new NewsFragment(), TAG_FRAGMENT_NEWS).commit();
+                    }
+                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) != null) {
+                        //if the other fragment is visible, hide it.
+                        fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME)).commit();
+                    }
+
                     break;
             }
-
-            transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT); // replace a Fragment with Frame Layout
-            transaction.commit(); // commit the changes
 
             return true;
         }
@@ -75,20 +97,28 @@ public class MainFragment extends Fragment {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        Log.d("Fabio", "onCreateView: MainFrag");
+
+        if (savedInstanceState == null) {
+
+            Log.d("Fabio", "savedInstanceState null: MainFrag");
+
+            mFragment = new HomeFragment();
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT_HOME); // replace a Fragment with Frame Layout
+            transaction.commit(); // commit the changes
+        }
+
+        Log.d("Fabio", "onActivityCreated: MainFrag");
+
         return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            mFragment = new HomeFragment();
 
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT); // replace a Fragment with Frame Layout
-            transaction.commit(); // commit the changes
-        }
-
-        super.onViewCreated(view, savedInstanceState);
     }
 }

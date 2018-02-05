@@ -4,9 +4,14 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import fabiohideki.com.megagenerator.model.Bolas;
+import com.google.gson.Gson;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+
 import fabiohideki.com.megagenerator.model.UltimoResultado;
-import fabiohideki.com.megagenerator.utils.Utils;
 
 /**
  * Created by hidek on 04/02/2018.
@@ -17,6 +22,10 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
     private TaskCallBack listener;
     private Context context;
     private final String TAG = getClass().getSimpleName();
+
+    private static final String URL_MEGASENA = "http://loterias.caixa.gov.br/wps/portal/loterias/landing/megasena/";
+
+    private String mUrlAPIMegasena;
 
     public UltimoResultadoAsyncTaskLoader(Context context, TaskCallBack listener) {
         super(context);
@@ -38,26 +47,63 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
     @Override
     public UltimoResultado loadInBackground() {
 
-        Log.d(TAG, "loadInBackground: ");
+        mUrlAPIMegasena = getUrlAPIMegasena();
 
-        Utils.waiting();
+        Log.d(TAG, "loadInBackground: " + mUrlAPIMegasena);
 
-        Bolas bolas = new Bolas(10, 15, 5, 2, 36, 78);
+        if (mUrlAPIMegasena != null) {
 
-        UltimoResultado ultimoResultado = new UltimoResultado(
-                2010,
-                bolas,
-                "03/02/2018",
-                true,
-                "R$ 56.000.000,00",
-                "06/02/2018",
-                "Não houve acertador",
-                "106 apostas ganhadoras, R$ 33.705,40",
-                "7436 apostas ganhadoras, R$ 686,38"
-        );
+            try {
 
-        ultimoResultado.setBolas(bolas);
+                Document apiDoc = Jsoup.connect(mUrlAPIMegasena)
+                        .header("Accept-Encoding", "gzip, deflate")
+                        .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36")
+                        .maxBodySize(0)
+                        //.timeout(60000)
+                        .get();
 
-        return ultimoResultado;
+                Log.d(TAG, "loadInBackground: " + apiDoc.text());
+
+                String jsonResult = apiDoc.text();
+
+                Gson gson = new Gson();
+
+                UltimoResultado ultimoResultado = gson.fromJson(jsonResult, UltimoResultado.class);
+
+                Log.d(TAG, "loadInBackground: concurso " + ultimoResultado.getNroConcurso());
+
+
+                return ultimoResultado;
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return null;
     }
+
+    private String getUrlAPIMegasena() {
+
+        try {
+            Document docWebPageMegasena = Jsoup.connect(URL_MEGASENA).get();
+
+            String baseURL = docWebPageMegasena.select("head > base").attr("href");
+            String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
+
+            if (baseURL != null && urlBuscarResultado != null) {
+                return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+
+    }
+
 }

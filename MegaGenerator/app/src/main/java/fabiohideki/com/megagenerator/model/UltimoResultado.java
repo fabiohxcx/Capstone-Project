@@ -1,5 +1,7 @@
 package fabiohideki.com.megagenerator.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.parceler.Parcel;
 
 /**
@@ -8,30 +10,59 @@ import org.parceler.Parcel;
 @Parcel
 public class UltimoResultado {
 
+    @SerializedName("concurso")
     int nroConcurso;
-    Bolas bolas;
+
+    String resultado;
+
+    @SerializedName("data")
     String dataConcurso;
-    boolean acumulou;
-    String estPremioProxConc;
+
+    @SerializedName("acumulado")
+    int acumulou;
+
+    @SerializedName("vr_estimativa")
+    double estPremioProxConc;
+
+    @SerializedName("dt_proximo_concurso")
     String dataProxConc;
-    String sena;
-    String quina;
-    String quadra;
+
+    @SerializedName("ganhadores")
+    int ganhadoresSena;
+
+    @SerializedName("valor")
+    double valorSena;
+
+    @SerializedName("ganhadores_quina")
+    int ganhadoresQuina;
+
+    @SerializedName("valor_quina")
+    double valorQuina;
+
+    @SerializedName("ganhadores_quadra")
+    int ganhadoresQuadra;
+
+    @SerializedName("valor_quadra")
+    double valorQuadra;
+
 
     public UltimoResultado() {
 
     }
 
-    public UltimoResultado(int nroConcurso, Bolas bolas, String dataConcurso, boolean acumulou, String estPremioProxConc, String dataProxConc, String sena, String quina, String quadra) {
+    public UltimoResultado(int nroConcurso, String resultado, String dataConcurso, int acumulou, double estPremioProxConc, String dataProxConc, int ganhadoresSena, double valorSena, int ganhadoresQuina, double valorQuina, int ganhadoresQuadra, double valorQuadra) {
         this.nroConcurso = nroConcurso;
-        this.bolas = bolas;
+        this.resultado = resultado;
         this.dataConcurso = dataConcurso;
         this.acumulou = acumulou;
         this.estPremioProxConc = estPremioProxConc;
         this.dataProxConc = dataProxConc;
-        this.sena = sena;
-        this.quina = quina;
-        this.quadra = quadra;
+        this.ganhadoresSena = ganhadoresSena;
+        this.valorSena = valorSena;
+        this.ganhadoresQuina = ganhadoresQuina;
+        this.valorQuina = valorQuina;
+        this.ganhadoresQuadra = ganhadoresQuadra;
+        this.valorQuadra = valorQuadra;
     }
 
     public int getNroConcurso() {
@@ -42,15 +73,16 @@ public class UltimoResultado {
         this.nroConcurso = nroConcurso;
     }
 
-    public Bolas getBolas() {
-        return bolas;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setBolas(Bolas bolas) {
-        this.bolas = bolas;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public String getDataConcurso() {
+
         return dataConcurso;
     }
 
@@ -58,23 +90,24 @@ public class UltimoResultado {
         this.dataConcurso = dataConcurso;
     }
 
-    public boolean isAcumulou() {
+    public int isAcumulou() {
         return acumulou;
     }
 
-    public void setAcumulou(boolean acumulou) {
+    public void setAcumulou(int acumulou) {
         this.acumulou = acumulou;
     }
 
-    public String getEstPremioProxConc() {
+    public double getEstPremioProxConc() {
         return estPremioProxConc;
     }
 
-    public void setEstPremioProxConc(String estPremioProxConc) {
+    public void setEstPremioProxConc(double estPremioProxConc) {
         this.estPremioProxConc = estPremioProxConc;
     }
 
     public String getDataProxConc() {
+
         return dataProxConc;
     }
 
@@ -82,27 +115,51 @@ public class UltimoResultado {
         this.dataProxConc = dataProxConc;
     }
 
-    public String getSena() {
-        return sena;
+    public int getGanhadoresSena() {
+        return ganhadoresSena;
     }
 
-    public void setSena(String sena) {
-        this.sena = sena;
+    public void setGanhadoresSena(int ganhadoresSena) {
+        this.ganhadoresSena = ganhadoresSena;
     }
 
-    public String getQuina() {
-        return quina;
+    public double getValorSena() {
+        return valorSena;
     }
 
-    public void setQuina(String quina) {
-        this.quina = quina;
+    public void setValorSena(double valorSena) {
+        this.valorSena = valorSena;
     }
 
-    public String getQuadra() {
-        return quadra;
+    public int getGanhadoresQuina() {
+        return ganhadoresQuina;
     }
 
-    public void setQuadra(String quadra) {
-        this.quadra = quadra;
+    public void setGanhadoresQuina(int ganhadoresQuina) {
+        this.ganhadoresQuina = ganhadoresQuina;
+    }
+
+    public double getValorQuina() {
+        return valorQuina;
+    }
+
+    public void setValorQuina(double valorQuina) {
+        this.valorQuina = valorQuina;
+    }
+
+    public int getGanhadoresQuadra() {
+        return ganhadoresQuadra;
+    }
+
+    public void setGanhadoresQuadra(int ganhadoresQuadra) {
+        this.ganhadoresQuadra = ganhadoresQuadra;
+    }
+
+    public double getValorQuadra() {
+        return valorQuadra;
+    }
+
+    public void setValorQuadra(double valorQuadra) {
+        this.valorQuadra = valorQuadra;
     }
 }

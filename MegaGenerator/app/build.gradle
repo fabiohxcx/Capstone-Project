@@ -60,9 +60,8 @@ dependencies {
     //AdMob
     compile 'com.google.android.gms:play-services-ads:11.8.0'
 
-    //http://square.github.io/retrofit/
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //https://github.com/google/gson
+    compile 'com.google.code.gson:gson:2.8.2'
 
     //http://facebook.github.io/stetho/
     compile 'com.facebook.stetho:stetho:1.5.0'

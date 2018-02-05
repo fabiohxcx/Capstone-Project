@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_menu_camera"
+        android:icon="@drawable/home_outline"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/rss"
         android:title="@string/title_news" />
 
 </menu>
