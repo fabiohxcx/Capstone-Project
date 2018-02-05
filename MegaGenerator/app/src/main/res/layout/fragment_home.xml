@@ -43,39 +43,40 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:elevation="2dp"
-                    android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/material_text_title"
+                    android:textStyle="bold"
                     tools:text="Concurso 1935" />
 
                 <TextView
                     android:id="@+id/tv_card_concurso_acumulou"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:elevation="2dp"
                     android:text="@string/label_acumulou"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/material_text_subhead"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_card_concurso"
-                    app:layout_constraintStart_toEndOf="@+id/tv_card_concurso"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso" />
 
 
                 <TextView
                     android:id="@+id/bola1"
                     android:layout_width="@dimen/ball_size"
                     android:layout_height="@dimen/ball_size"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/bola2"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso_acumulou"
                     tools:text="01" />
 
 
@@ -83,49 +84,48 @@
                     android:id="@+id/bola2"
                     android:layout_width="@dimen/ball_size"
                     android:layout_height="@dimen/ball_size"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/bola1"
                     app:layout_constraintEnd_toStartOf="@+id/bola3"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/bola1"
+                    app:layout_constraintTop_toTopOf="@+id/bola1"
                     tools:text="02" />
 
                 <TextView
                     android:id="@+id/bola3"
                     android:layout_width="@dimen/ball_size"
                     android:layout_height="@dimen/ball_size"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_in_center"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintBottom_toBottomOf="@+id/bola2"
+                    app:layout_constraintEnd_toStartOf="@+id/bola4"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/bola2"
+                    app:layout_constraintTop_toTopOf="@+id/bola2"
                     tools:text="03" />
-
-                <android.support.constraint.Guideline
-                    android:id="@+id/guideline_vertical_in_center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
 
                 <TextView
                     android:id="@+id/bola4"
                     android:layout_width="@dimen/ball_size"
                     android:layout_height="@dimen/ball_size"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/guideline_vertical_in_center"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintBottom_toBottomOf="@+id/bola3"
+                    app:layout_constraintEnd_toStartOf="@+id/bola5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/bola3"
+                    app:layout_constraintTop_toTopOf="@+id/bola3"
                     tools:text="04" />
 
                 <TextView
@@ -133,27 +133,32 @@
                     android:layout_width="@dimen/ball_size"
                     android:layout_height="@dimen/ball_size"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/bola4"
+                    app:layout_constraintEnd_toStartOf="@+id/bola6"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/bola4"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintTop_toTopOf="@+id/bola4"
                     tools:text="05" />
 
                 <TextView
                     android:id="@+id/bola6"
-                    android:layout_width="@dimen/ball_size"
+                    android:layout_width="35dp"
                     android:layout_height="@dimen/ball_size"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:background="@drawable/bola"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/bola5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/bola5"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_card_concurso"
+                    app:layout_constraintTop_toTopOf="@+id/bola5"
                     tools:text="06" />
 
                 <TextView
