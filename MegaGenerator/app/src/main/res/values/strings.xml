@@ -23,9 +23,14 @@
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="navigation_drawer_close">Fechar menu</string>
     <string name="Home">Home</string>
-    <string name="results">Resultados Anteriores</string>
+    <string name="results">Resultados anteriores</string>
     <string name="number_generator">Gerador de palpites</string>
     <string name="near_lottery">Lotéricas próximas</string>
+    <string name="no_winners">Não houve acertador</string>
+    <string name="winners_bets">apostas ganhadoras, R$</string>
+    <string name="today">hoje</string>
+    <string name="tomorrow">amanhã</string>
+    <string name="days">dias</string>
 
 
 </resources>

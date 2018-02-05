@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MegaGenerator.iml" filepath="$PROJECT_DIR$/MegaGenerator.iml" />
+      <module fileurl="file://C:\Users\fabio.lagoa.LGE\Desktop\Udacity\Capstone-Project\MegaGenerator\MegaGenerator.iml" filepath="C:\Users\fabio.lagoa.LGE\Desktop\Udacity\Capstone-Project\MegaGenerator\MegaGenerator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\fabio.lagoa.LGE\Desktop\Udacity\Capstone-Project\MegaGenerator\app\app.iml" filepath="C:\Users\fabio.lagoa.LGE\Desktop\Udacity\Capstone-Project\MegaGenerator\app\app.iml" />
     </modules>
   </component>
 </project>

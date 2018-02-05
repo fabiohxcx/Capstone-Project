@@ -59,7 +59,7 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
                         .header("Accept-Encoding", "gzip, deflate")
                         .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36")
                         .maxBodySize(0)
-                        //.timeout(60000)
+                        .timeout(60000)
                         .get();
 
                 Log.d(TAG, "loadInBackground: " + apiDoc.text());
@@ -94,6 +94,9 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
             String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
 
             if (baseURL != null && urlBuscarResultado != null) {
+
+                Log.d("Fabio", "getUrlAPIMegasena: " + baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis());
+
                 return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
             }
 

@@ -118,6 +118,21 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     @BindString(R.string.permission_denied)
     String mPermissionDenied;
 
+    @BindString(R.string.no_winners)
+    String mNoWinners;
+
+    @BindString(R.string.winners_bets)
+    String mWinnerBets;
+
+    @BindString(R.string.today)
+    String mToday;
+
+    @BindString(R.string.tomorrow)
+    String mTomorrow;
+
+    @BindString(R.string.days)
+    String mDays;
+
     private static final int MEGASEGA_ULTIMO_RESULTADO_LOADER = 22;
 
     private static final int REQUEST = 112;
@@ -201,24 +216,34 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
 
         if (ultimoResultado.getGanhadoresSena() == 0) {
-            mResultSena.setText("Não houve acertador");
+            mResultSena.setText(mNoWinners);
         } else {
-            mResultSena.setText(ultimoResultado.getGanhadoresSena() + " apostas ganhadoras, R$ " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorSena())));
+            mResultSena.setText(ultimoResultado.getGanhadoresSena() + " " + mWinnerBets + " " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorSena())));
         }
 
         if (ultimoResultado.getGanhadoresQuina() == 0) {
-            mResultaQuina.setText("Não houve acertador");
+            mResultaQuina.setText(mNoWinners);
         } else {
-            mResultaQuina.setText(ultimoResultado.getGanhadoresQuina() + " apostas ganhadoras, R$ " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorQuina())));
+            mResultaQuina.setText(ultimoResultado.getGanhadoresQuina() + " " + mWinnerBets + " " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorQuina())));
         }
 
         if (ultimoResultado.getGanhadoresQuadra() == 0) {
-            mResultQuadra.setText("Não houve acertador");
+            mResultQuadra.setText(mNoWinners);
         } else {
-            mResultQuadra.setText(ultimoResultado.getGanhadoresQuadra() + " apostas ganhadoras, R$ " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorQuadra())));
+            mResultQuadra.setText(ultimoResultado.getGanhadoresQuadra() + " " + mWinnerBets + " " + Utils.decimalFormat(Double.toString(ultimoResultado.getValorQuadra())));
         }
 
-        mDataProxConcurso.setText(Utils.convertMillitoDate(ultimoResultado.getDataProxConc()));
+        int diffDays = Utils.diffBetweenDayAndToday(Utils.convertMillitoDate(ultimoResultado.getDataProxConc()));
+
+        if (diffDays != -1) {
+            if (diffDays == 0) {
+                mDataProxConcurso.setText(Utils.convertMillitoDate(ultimoResultado.getDataProxConc()) + " (" + mToday + ")");
+            } else if (diffDays == 1) {
+                mDataProxConcurso.setText(Utils.convertMillitoDate(ultimoResultado.getDataProxConc()) + " (" + mTomorrow + ")");
+            } else {
+                mDataProxConcurso.setText(Utils.convertMillitoDate(ultimoResultado.getDataProxConc()) + " (" + diffDays + " " + mDays + ")");
+            }
+        }
 
         mValorProxConcurso.setText(Utils.decimalFormat(Double.toString(ultimoResultado.getEstPremioProxConc())));
 
