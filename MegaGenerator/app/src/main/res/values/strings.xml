@@ -7,10 +7,6 @@
     <string name="title_home">Home</string>
     <string name="title_news">Novidades</string>
 
-    <!-- NavigationView title -->
-    <string name="navigation_drawer_open">Abrir menu</string>
-    <string name="navigation_drawer_close">Fechar menu</string>
-
     <!-- Carview Home -->
     <string name="card_title_sena">Sena - 6 números acertados</string>
     <string name="card_title_quina">Quina - 5 números acertados</string>
@@ -22,6 +18,14 @@
     <string name="checkout_last_result">Veja o último resultado da Mega-Sena</string>
     <string name="share_via">Compartilhar por</string>
     <string name="permission_denied">Sem permissão para armazegar imagens</string>
+
+    <!-- NavigationView title -->
+    <string name="navigation_drawer_open">Abrir menu</string>
+    <string name="navigation_drawer_close">Fechar menu</string>
+    <string name="Home">Home</string>
+    <string name="results">Resultados Anteriores</string>
+    <string name="number_generator">Gerador de palpites</string>
+    <string name="near_lottery">Lotéricas próximas</string>
 
 
 </resources>
