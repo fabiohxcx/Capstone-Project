@@ -2,7 +2,7 @@ package fabiohideki.com.megagenerator.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
+
+    private MainFragment mainFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +47,13 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (savedInstanceState == null) {
+        mainFragment = (MainFragment) fragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT);
 
-            Log.d("Fabio", "savedInstanceState null: MainActivity");
-
-            MainFragment mainFragment = new MainFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, mainFragment); // replace a Fragment with Frame Layout
-            transaction.commit(); // commit the changes
-
+        if (mainFragment == null) {
+            mainFragment = new MainFragment();
+            fragmentManager.beginTransaction().add(R.id.frame, mainFragment, TAG_MAIN_FRAGMENT).commit();
         }
 
         Log.d("Fabio", "onCreate: MainActivity");

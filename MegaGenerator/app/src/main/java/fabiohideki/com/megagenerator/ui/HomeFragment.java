@@ -181,6 +181,8 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
         Log.d("Fabio", "onActivityCreated: HomeFrag");
 
+        mBtRetry.setVisibility(View.INVISIBLE);
+
         return rootView;
     }
 
