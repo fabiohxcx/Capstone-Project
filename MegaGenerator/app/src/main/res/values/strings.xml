@@ -42,5 +42,8 @@
     <string name="downloaded">Arquivo baixado</string>
     <string name="unzip">Arquivo descompactado</string>
 
+    <!-- HistoryResultFragment -->
+    <string name="item_title_concurso">Concurso</string>
+
 
 </resources>

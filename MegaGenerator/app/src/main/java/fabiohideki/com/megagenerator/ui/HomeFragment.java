@@ -323,7 +323,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
             this.mUltimoResultado = ultimoResultado;
             setupCard(ultimoResultado);
-            
+
             checkMissingResults(mUltimoResultado);
 
             this.onTaskCompleted();
@@ -333,7 +333,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void checkMissingResults(UltimoResultado mUltimoResultado) {
-        
+        //Todo implement this check
     }
 
     @Override

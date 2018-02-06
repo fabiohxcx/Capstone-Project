@@ -22,4 +22,7 @@
     <dimen name="nav_header_height">100dp</dimen>
     <dimen name="ball_size">35dp</dimen>
 
+    <!-- result history screen -->
+    <dimen name="ball_size_small">30dp</dimen>
+
 </resources>

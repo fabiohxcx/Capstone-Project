@@ -1,13 +1,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fabiohideki.com.megagenerator.ui.HistoryResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.l4digital.fastscroll.FastScrollRecyclerView
+        android:id="@+id/recyclerview_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Results" />
-
+        app:bubbleColor="@color/colorPrimary"
+        app:bubbleTextColor="@color/colorAccent"
+        app:handleColor="#999999"
+        app:hideScrollbar="false"
+        app:showTrack="false"
+        app:trackColor="#bbbbbb"
+        tools:listitem="@layout/item_history_result" />
 </FrameLayout>

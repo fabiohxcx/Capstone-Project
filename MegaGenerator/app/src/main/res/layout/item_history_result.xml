@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/bola1"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/bola2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_history_number"
+        tools:text="01" />
+
+
+    <TextView
+        android:id="@+id/bola2"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bola1"
+        app:layout_constraintEnd_toStartOf="@+id/bola3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bola1"
+        app:layout_constraintTop_toTopOf="@+id/bola1"
+        tools:text="02" />
+
+    <TextView
+        android:id="@+id/bola3"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bola2"
+        app:layout_constraintEnd_toStartOf="@+id/bola4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bola2"
+        app:layout_constraintTop_toTopOf="@+id/bola2"
+        tools:text="03" />
+
+    <TextView
+        android:id="@+id/bola4"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bola3"
+        app:layout_constraintEnd_toStartOf="@+id/bola5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bola3"
+        app:layout_constraintTop_toTopOf="@+id/bola3"
+        tools:text="04" />
+
+    <TextView
+        android:id="@+id/bola5"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bola4"
+        app:layout_constraintEnd_toStartOf="@+id/bola6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bola4"
+        app:layout_constraintTop_toTopOf="@+id/bola4"
+        tools:text="05" />
+
+    <TextView
+        android:id="@+id/bola6"
+        android:layout_width="@dimen/ball_size_small"
+        android:layout_height="@dimen/ball_size_small"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bola"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bola5"
+        app:layout_constraintEnd_toStartOf="@+id/bt_item_history_copy"
+        app:layout_constraintStart_toEndOf="@+id/bola5"
+        app:layout_constraintTop_toTopOf="@+id/bola5"
+        tools:text="06" />
+
+    <ImageButton
+        android:id="@+id/bt_item_history_share"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/share_variant" />
+
+    <ImageButton
+        android:id="@+id/bt_item_history_copy"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_item_history_share"
+        app:layout_constraintEnd_toStartOf="@+id/bt_item_history_share"
+        app:layout_constraintTop_toTopOf="@+id/bt_item_history_share"
+        app:srcCompat="@drawable/content_copy" />
+
+    <TextView
+        android:id="@+id/tv_item_history_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_title_concurso"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_item_result_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_history_number"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_history_number"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_history_number"
+        tools:text="2010 (06/02/2010)" />
+
+</android.support.constraint.ConstraintLayout>
