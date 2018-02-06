@@ -1,8 +1,11 @@
 package fabiohideki.com.megagenerator.ui;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import fabiohideki.com.megagenerator.repository.ResultsContract;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -11,6 +14,34 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Utils.waiting();
+
+        try {
+            Cursor cursor;
+            cursor = getContentResolver().query(ResultsContract.ResultEntry.CONTENT_URI,
+                    null,
+                    null,
+                    null,
+                    null);
+
+            if (cursor != null && cursor.getCount() == 0) {
+
+                Intent intentDownload = new Intent(this, DownloadHistoryActivity.class);
+                startActivity(intentDownload);
+                finish();
+
+            } else {
+
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
 /*      Insert Code
 
@@ -96,9 +127,6 @@ public class SplashActivity extends AppCompatActivity {
 
         asyncTask.execute();*/
 
-        //Utils.waiting();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 }
