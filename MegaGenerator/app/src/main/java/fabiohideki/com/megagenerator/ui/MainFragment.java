@@ -54,12 +54,12 @@ public class MainFragment extends Fragment {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         setupViewPager(mViewPager);
         mViewPager.setPagingEnabled(false);
 
         return rootView;
     }
-
 
     private void setupViewPager(ViewPager viewPager) {
 

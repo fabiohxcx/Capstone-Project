@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity
 
         setupViewPager(mViewPager);
         mViewPager.setPagingEnabled(false);
+        mViewPager.setOffscreenPageLimit(1);
 
         Log.d("Fabio", "onCreate: MainActivity");
     }

@@ -2,8 +2,10 @@ package fabiohideki.com.megagenerator.ui;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import fabiohideki.com.megagenerator.repository.ResultsContract;
 
@@ -19,24 +21,37 @@ public class SplashActivity extends AppCompatActivity {
 
         try {
             Cursor cursor;
-            cursor = getContentResolver().query(ResultsContract.ResultEntry.CONTENT_URI,
+
+            Uri uri = ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath(ResultsContract.PATH_LAST).build();
+
+            cursor = getContentResolver().query(uri,
                     null,
                     null,
                     null,
                     null);
 
-            if (cursor != null && cursor.getCount() == 0) {
+            if (cursor != null) {
 
-                Intent intentDownload = new Intent(this, DownloadHistoryActivity.class);
-                startActivity(intentDownload);
-                finish();
+                if (cursor.getCount() == 0) {
 
-            } else {
-                // Toast.makeText(this, "" + cursor.getCount(), Toast.LENGTH_SHORT).show();
+                    Intent intentDownload = new Intent(this, DownloadHistoryActivity.class);
+                    startActivity(intentDownload);
+                    finish();
 
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                } else {
+                    // Toast.makeText(this, "" + cursor.getCount(), Toast.LENGTH_SHORT).show();
+
+                    cursor.moveToFirst();
+
+                    String lastResultinDB = cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_CONCURSO));
+
+                    Log.d("Fabio", "splash: " + " - " + lastResultinDB);
+
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra(ResultsContract.ResultEntry.COLUMN_CONCURSO, lastResultinDB);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
         } catch (Exception e) {
