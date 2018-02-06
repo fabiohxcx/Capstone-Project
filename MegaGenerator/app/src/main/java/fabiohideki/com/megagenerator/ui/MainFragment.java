@@ -5,22 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
+import fabiohideki.com.megagenerator.adapter.ViewPagerAdapter;
 import fabiohideki.com.megagenerator.custom.CustomViewPager;
 
 /**
@@ -40,14 +35,6 @@ public class MainFragment extends Fragment {
     @BindView(R.id.viewpager)
     CustomViewPager mViewPager;
 
-
-    private FragmentTransaction transaction;
-
-    private Fragment mFragment;
-
-    private final String TAG_FRAGMENT_HOME = "frag_home";
-    private final String TAG_FRAGMENT_NEWS = "frag_news";
-
     public MainFragment() {
         // Required empty public constructor
     }
@@ -60,27 +47,12 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-/*
-        Log.d("Fabio", "onCreateView: MainFrag");
-
-        if (savedInstanceState == null) {
-
-            Log.d("Fabio", "savedInstanceState null: MainFrag");
-
-            mFragment = new HomeFragment();
-
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_inner, mFragment, TAG_FRAGMENT_HOME); // replace a Fragment with Frame Layout
-            transaction.commit(); // commit the changes
-        }
-
-        Log.d("Fabio", "onActivityCreated: MainFrag");*/
 
         setupViewPager(mViewPager);
         mViewPager.setPagingEnabled(false);
@@ -90,7 +62,8 @@ public class MainFragment extends Fragment {
 
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         HomeFragment homeFragment = new HomeFragment();
         adapter.addFragment(homeFragment, mTitleHome);
@@ -99,36 +72,6 @@ public class MainFragment extends Fragment {
         adapter.addFragment(newsFragment, mTitleNews);
 
         viewPager.setAdapter(adapter);
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

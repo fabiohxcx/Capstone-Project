@@ -76,4 +76,6 @@ dependencies {
     compile 'org.parceler:parceler-api:1.1.9'
     annotationProcessor 'org.parceler:parceler:1.1.9'
 
+    //https://github.com/L4Digital/FastScroll
+    compile 'com.l4digital.fastscroll:fastscroll:1.0.4'
 }

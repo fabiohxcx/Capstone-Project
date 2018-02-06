@@ -2,8 +2,8 @@ package fabiohideki.com.megagenerator.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
+import fabiohideki.com.megagenerator.adapter.ViewPagerStateAdapter;
+import fabiohideki.com.megagenerator.custom.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,9 +30,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    private static final String TAG_MAIN_FRAGMENT = "main_fragment";
-
-    private MainFragment mainFragment;
+    @BindView(R.id.main_viewpager)
+    CustomViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,8 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        mainFragment = (MainFragment) fragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT);
-
-        if (mainFragment == null) {
-            mainFragment = new MainFragment();
-            fragmentManager.beginTransaction().add(R.id.frame, mainFragment, TAG_MAIN_FRAGMENT).commit();
-        }
+        setupViewPager(mViewPager);
+        mViewPager.setPagingEnabled(false);
 
         Log.d("Fabio", "onCreate: MainActivity");
     }
@@ -98,13 +93,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            mViewPager.setCurrentItem(0);
         } else if (id == R.id.nav_results) {
-
+            mViewPager.setCurrentItem(1);
         } else if (id == R.id.nav_generator) {
-
+            mViewPager.setCurrentItem(2);
         } else if (id == R.id.nav_near_lottery) {
-
+            mViewPager.setCurrentItem(3);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -114,4 +109,23 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerStateAdapter adapter = new ViewPagerStateAdapter(getSupportFragmentManager());
+
+        MainFragment mainFragment = new MainFragment();
+        adapter.addFragment(mainFragment, "");
+
+        HistoryResultFragment historyResultFragment = new HistoryResultFragment();
+        adapter.addFragment(historyResultFragment, "");
+
+        GeneratorFragment generatorFragment = new GeneratorFragment();
+        adapter.addFragment(generatorFragment, "");
+
+        NearByLotteryFragment nearByLotteryFragment = new NearByLotteryFragment();
+        adapter.addFragment(nearByLotteryFragment, "");
+
+        viewPager.setAdapter(adapter);
+    }
+
 }
