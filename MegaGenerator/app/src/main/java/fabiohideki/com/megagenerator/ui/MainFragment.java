@@ -3,20 +3,25 @@ package fabiohideki.com.megagenerator.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
+import fabiohideki.com.megagenerator.custom.CustomViewPager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,16 @@ public class MainFragment extends Fragment {
 
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
+
+    @BindString(R.string.title_home)
+    String mTitleHome;
+
+    @BindString(R.string.title_news)
+    String mTitleNews;
+
+    @BindView(R.id.viewpager)
+    CustomViewPager mViewPager;
+
 
     private FragmentTransaction transaction;
 
@@ -36,52 +51,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
         // Required empty public constructor
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-            FragmentManager fragmentManager = getFragmentManager();
-
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-
-                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) != null) {
-                        //if the fragment exists, show it.
-                        fragmentManager.beginTransaction().show(fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME)).commit();
-                    } else {
-                        //if the fragment does not exist, add it to fragment manager.
-                        fragmentManager.beginTransaction().add(R.id.frame_inner, new HomeFragment(), TAG_FRAGMENT_HOME).commit();
-                    }
-                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS) != null) {
-                        //if the other fragment is visible, hide it.
-                        fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS)).commit();
-                    }
-                    break;
-
-                case R.id.navigation_notifications:
-
-                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS) != null) {
-                        //if the fragment exists, show it.
-                        fragmentManager.beginTransaction().show(fragmentManager.findFragmentByTag(TAG_FRAGMENT_NEWS)).commit();
-                    } else {
-                        //if the fragment does not exist, add it to fragment manager.
-                        fragmentManager.beginTransaction().add(R.id.frame_inner, new NewsFragment(), TAG_FRAGMENT_NEWS).commit();
-                    }
-                    if (fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) != null) {
-                        //if the other fragment is visible, hide it.
-                        fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME)).commit();
-                    }
-
-                    break;
-            }
-
-            return true;
-        }
-
-    };
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -97,6 +66,7 @@ public class MainFragment extends Fragment {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+/*
         Log.d("Fabio", "onCreateView: MainFrag");
 
         if (savedInstanceState == null) {
@@ -110,15 +80,76 @@ public class MainFragment extends Fragment {
             transaction.commit(); // commit the changes
         }
 
-        Log.d("Fabio", "onActivityCreated: MainFrag");
+        Log.d("Fabio", "onActivityCreated: MainFrag");*/
+
+        setupViewPager(mViewPager);
+        mViewPager.setPagingEnabled(false);
 
         return rootView;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
 
+        HomeFragment homeFragment = new HomeFragment();
+        adapter.addFragment(homeFragment, mTitleHome);
+
+        NewsFragment newsFragment = new NewsFragment();
+        adapter.addFragment(newsFragment, mTitleNews);
+
+        viewPager.setAdapter(adapter);
     }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mViewPager.setCurrentItem(0);
+                    break;
+
+                case R.id.navigation_notifications:
+                    mViewPager.setCurrentItem(1);
+                    break;
+            }
+
+            return true;
+        }
+
+    };
+
 }
