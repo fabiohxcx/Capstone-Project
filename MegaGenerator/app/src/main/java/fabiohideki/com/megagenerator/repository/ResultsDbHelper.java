@@ -26,7 +26,7 @@ public class ResultsDbHelper extends SQLiteOpenHelper {
 
         // Create tasks table (careful to follow SQL formatting rules)
         final String CREATE_TABLE = "CREATE TABLE " + ResultsContract.ResultEntry.TABLE_NAME + " (" +
-                ResultsContract.ResultEntry.COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                ResultsContract.ResultEntry.COLUMN_CONCURSO + " INTEGER PRIMARY KEY, " +
                 ResultsContract.ResultEntry.COLUMN_DATE + " TEXT NOT NULL, " +
                 ResultsContract.ResultEntry.COLUMN_NUMBERS + " TEXT NOT NULL);";
 
