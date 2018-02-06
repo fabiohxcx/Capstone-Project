@@ -38,6 +38,9 @@
     <!-- DownloadHistoryActivity -->
     <string name="loading_history">Baixando histórico de sorteios</string>
     <string name="welcome">Bem vindo!</string>
+    <string name="downloading">Baixando ...</string>
+    <string name="downloaded">Arquivo baixado</string>
+    <string name="unzip">Arquivo descompactado</string>
 
 
 </resources>

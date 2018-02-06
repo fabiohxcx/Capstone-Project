@@ -36,7 +36,7 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        Log.d(TAG, "onStartLoading: ");
+        Log.d("Fabio", "onStartLoading: ");
 
         listener.onStartTask();
 
@@ -48,7 +48,7 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
 
         mUrlAPIMegasena = getUrlAPIMegasena();
 
-        Log.d(TAG, "loadInBackground: " + mUrlAPIMegasena);
+        Log.d("Fabio", "loadInBackground: " + mUrlAPIMegasena);
 
         if (mUrlAPIMegasena != null) {
 
@@ -61,7 +61,7 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
                         .timeout(60000)
                         .get();
 
-                Log.d(TAG, "loadInBackground: " + apiDoc.text());
+                Log.d("Fabio", "loadInBackground: " + apiDoc.text());
 
                 String jsonResult = apiDoc.text();
 
@@ -69,8 +69,7 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
 
                 UltimoResultado ultimoResultado = gson.fromJson(jsonResult, UltimoResultado.class);
 
-                Log.d(TAG, "loadInBackground: concurso " + ultimoResultado.getNroConcurso());
-
+                Log.d("Fabio", "loadInBackground: concurso " + ultimoResultado.getNroConcurso());
 
                 return ultimoResultado;
 

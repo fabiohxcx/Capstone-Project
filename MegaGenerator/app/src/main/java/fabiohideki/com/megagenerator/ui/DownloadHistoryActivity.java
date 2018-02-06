@@ -1,5 +1,6 @@
 package fabiohideki.com.megagenerator.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
-import fabiohideki.com.megagenerator.utils.Utils;
+import fabiohideki.com.megagenerator.network.DownloadAllResultsTask;
+import fabiohideki.com.megagenerator.network.TaskCallBack;
 
-public class DownloadHistoryActivity extends AppCompatActivity {
+public class DownloadHistoryActivity extends AppCompatActivity implements TaskCallBack {
 
     @BindView(R.id.progressbar_download)
     ProgressBar mProgressBar;
@@ -28,33 +30,25 @@ public class DownloadHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_download_history);
         ButterKnife.bind(this);
 
+        DownloadAllResultsTask downloadAllResultsTask = new DownloadAllResultsTask(this, mPercentage, this);
+        downloadAllResultsTask.execute();
 
-        // Start long running operation in a background thread
-        new Thread(new Runnable() {
-            public void run() {
-                while (progressStatus < 100) {
-                    progressStatus += 1;
-                    // Update the progress bar and display the
-                    //current value in the text view
-                    handler.post(new Runnable() {
-                        public void run() {
-                            mProgressBar.setProgress(progressStatus);
-                            mPercentage.setText(progressStatus + "%");
-                        }
-                    });
+    }
 
-                    try {
-                        // Sleep for 200 milliseconds.
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+    @Override
+    public void onStartTask() {
 
-            }
-        }).start();
+    }
 
-        Utils.waiting();
+    @Override
+    public void onTaskCompleted() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onTaskError() {
 
     }
 }

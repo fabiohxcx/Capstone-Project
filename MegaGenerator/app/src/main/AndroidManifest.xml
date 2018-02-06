@@ -32,7 +32,12 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".ui.DownloadHistoryActivity"></activity>
+        <activity
+            android:name=".ui.DownloadHistoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

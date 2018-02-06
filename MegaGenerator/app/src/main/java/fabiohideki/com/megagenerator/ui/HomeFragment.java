@@ -184,8 +184,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
             if (mUltimoResultado != null) {
                 setupCard(mUltimoResultado);
-            } else {
-                restartLoader();
             }
 
         } else {
@@ -319,17 +317,23 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoadFinished(Loader<UltimoResultado> loader, UltimoResultado
             ultimoResultado) {
-        Log.d(TAG, "onLoadFinished: ");
+        Log.d("Fabio", "onLoadFinished: ");
 
         if (ultimoResultado != null) {
 
             this.mUltimoResultado = ultimoResultado;
             setupCard(ultimoResultado);
+            
+            checkMissingResults(mUltimoResultado);
 
             this.onTaskCompleted();
         } else {
             onTaskError();
         }
+    }
+
+    private void checkMissingResults(UltimoResultado mUltimoResultado) {
+        
     }
 
     @Override
@@ -340,7 +344,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onStartTask() {
-        Log.d(TAG, "onStartTask: ");
+        Log.d("Fabio", "onStartTask: ");
 
         mBtRetry.setVisibility(View.INVISIBLE);
 
@@ -354,7 +358,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onTaskCompleted() {
-        Log.d(TAG, "onTaskCompleted: ");
+        Log.d("Fabio", "onTaskCompleted: ");
 
         rotateLoading.stop();
     }
