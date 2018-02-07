@@ -6,6 +6,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -44,7 +47,7 @@ public class Utils {
         int mMonth1 = (calendar2.get(Calendar.MONTH) + 1);
         int mDay1 = calendar2.get(Calendar.DAY_OF_MONTH);
 
-        return mDay1 + "/" + mMonth1 + "/" + mYear1;
+        return String.format("%02d", mDay1) + "/" + String.format("%02d", mMonth1) + "/" + mYear1;
     }
 
     public static String decimalFormat(String number) {
@@ -59,14 +62,13 @@ public class Utils {
         try {
 
             SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String inputString1 = myFormat.format(new Date());
-            String inputString2 = date;
+            String today = myFormat.format(new Date());
 
             Date date1 = null;
 
-            date1 = myFormat.parse(inputString1);
+            date1 = myFormat.parse(today);
 
-            Date date2 = myFormat.parse(inputString2);
+            Date date2 = myFormat.parse(date);
 
             long diff = date2.getTime() - date1.getTime();
 
@@ -166,8 +168,33 @@ public class Utils {
             return false;
         }
 
-
         return true;
+    }
+
+    public static String getUrlAPIMegasena() {
+
+        final String URL_MEGASENA = "http://loterias.caixa.gov.br/wps/portal/loterias/landing/megasena/";
+
+        try {
+            Document docWebPageMegasena = Jsoup.connect(URL_MEGASENA).get();
+
+            String baseURL = docWebPageMegasena.select("head > base").attr("href");
+            String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
+
+            if (baseURL != null && urlBuscarResultado != null) {
+
+                Log.d("Fabio", "getUrlAPIMegasena: " + baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis());
+
+                return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+
     }
 
 }

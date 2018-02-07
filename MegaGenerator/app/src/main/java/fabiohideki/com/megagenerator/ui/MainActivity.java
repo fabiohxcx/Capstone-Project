@@ -3,7 +3,6 @@ package fabiohideki.com.megagenerator.ui;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.main_viewpager)
     CustomViewPager mViewPager;
 
+    private ViewPagerStateAdapter adapter = new ViewPagerStateAdapter(getSupportFragmentManager());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        setupViewPager(mViewPager);
+        setupViewPager();
         mViewPager.setPagingEnabled(false);
         mViewPager.setOffscreenPageLimit(1);
 
@@ -95,12 +96,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             mViewPager.setCurrentItem(0);
+
         } else if (id == R.id.nav_results) {
-            mViewPager.setCurrentItem(1);
-        } else if (id == R.id.nav_generator) {
             mViewPager.setCurrentItem(2);
-        } else if (id == R.id.nav_near_lottery) {
+
+        } else if (id == R.id.nav_generator) {
             mViewPager.setCurrentItem(3);
+
+        } else if (id == R.id.nav_near_lottery) {
+            mViewPager.setCurrentItem(4);
+
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -111,22 +116,25 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerStateAdapter adapter = new ViewPagerStateAdapter(getSupportFragmentManager());
+    private void setupViewPager() {
+
 
         MainFragment mainFragment = new MainFragment();
-        adapter.addFragment(mainFragment, "");
+        adapter.addFragment(mainFragment);
+
+        PricesFragment pricesFragment = new PricesFragment();
+        adapter.addFragment(pricesFragment);
 
         HistoryResultFragment historyResultFragment = new HistoryResultFragment();
-        adapter.addFragment(historyResultFragment, "");
+        adapter.addFragment(historyResultFragment);
 
         GeneratorFragment generatorFragment = new GeneratorFragment();
-        adapter.addFragment(generatorFragment, "");
+        adapter.addFragment(generatorFragment);
 
         NearByLotteryFragment nearByLotteryFragment = new NearByLotteryFragment();
-        adapter.addFragment(nearByLotteryFragment, "");
+        adapter.addFragment(nearByLotteryFragment);
 
-        viewPager.setAdapter(adapter);
+        mViewPager.setAdapter(adapter);
     }
 
 }

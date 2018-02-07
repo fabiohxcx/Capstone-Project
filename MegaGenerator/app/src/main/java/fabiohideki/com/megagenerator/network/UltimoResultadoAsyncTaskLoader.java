@@ -12,6 +12,7 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 import fabiohideki.com.megagenerator.model.UltimoResultado;
+import fabiohideki.com.megagenerator.utils.Utils;
 
 /**
  * Created by hidek on 04/02/2018.
@@ -20,16 +21,11 @@ import fabiohideki.com.megagenerator.model.UltimoResultado;
 public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResultado> {
 
     private TaskCallBack listener;
-    private Context context;
-    private final String TAG = getClass().getSimpleName();
-
-    private static final String URL_MEGASENA = "http://loterias.caixa.gov.br/wps/portal/loterias/landing/megasena/";
 
     private String mUrlAPIMegasena;
 
     public UltimoResultadoAsyncTaskLoader(Context context, TaskCallBack listener) {
         super(context);
-        this.context = context;
         this.listener = listener;
     }
 
@@ -38,15 +34,14 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
         super.onStartLoading();
         Log.d("Fabio", "onStartLoading: ");
 
-        listener.onStartTask();
-
         forceLoad();
+        listener.onStartTask();
     }
 
     @Override
     public UltimoResultado loadInBackground() {
 
-        mUrlAPIMegasena = getUrlAPIMegasena();
+        mUrlAPIMegasena = Utils.getUrlAPIMegasena();
 
         Log.d("Fabio", "loadInBackground: " + mUrlAPIMegasena);
 
@@ -81,30 +76,6 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
         }
 
         return null;
-    }
-
-    private String getUrlAPIMegasena() {
-
-        try {
-            Document docWebPageMegasena = Jsoup.connect(URL_MEGASENA).get();
-
-            String baseURL = docWebPageMegasena.select("head > base").attr("href");
-            String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
-
-            if (baseURL != null && urlBuscarResultado != null) {
-
-                Log.d("Fabio", "getUrlAPIMegasena: " + baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis());
-
-                return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return null;
-
     }
 
 }

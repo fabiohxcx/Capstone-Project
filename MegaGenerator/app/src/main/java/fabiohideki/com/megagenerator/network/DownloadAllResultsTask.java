@@ -43,7 +43,6 @@ public class DownloadAllResultsTask extends AsyncTask<String, String, String> {
     private Context context;
     private URL mURLZipfile;
     private File mDownloadedZip;
-    private int progressStatus;
 
     private TextView percentage;
 
@@ -54,11 +53,6 @@ public class DownloadAllResultsTask extends AsyncTask<String, String, String> {
         this.context = context;
         this.percentage = percentage;
         this.listener = listener;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

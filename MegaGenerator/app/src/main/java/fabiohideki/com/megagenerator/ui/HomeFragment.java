@@ -40,6 +40,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fabiohideki.com.megagenerator.R;
 import fabiohideki.com.megagenerator.model.UltimoResultado;
+import fabiohideki.com.megagenerator.network.FillMissingResultsTask;
 import fabiohideki.com.megagenerator.network.TaskCallBack;
 import fabiohideki.com.megagenerator.network.UltimoResultadoAsyncTaskLoader;
 import fabiohideki.com.megagenerator.utils.Utils;
@@ -333,6 +334,11 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void checkMissingResults(UltimoResultado mUltimoResultado) {
+
+        FillMissingResultsTask missingResultsTask = new FillMissingResultsTask(context, mUltimoResultado.getNroConcurso());
+        missingResultsTask.execute();
+
+
         //Todo implement this check
     }
 

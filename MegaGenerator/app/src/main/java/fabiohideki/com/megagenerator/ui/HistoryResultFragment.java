@@ -65,14 +65,14 @@ public class HistoryResultFragment extends Fragment {
 
         if (cursor != null && cursor.getCount() > 0) {
 
+            Log.d("Fabio", "History:" + cursor.getCount());
+
             while (cursor.moveToNext()) {
                 Resultado resultado = new Resultado();
 
                 resultado.setNumero(cursor.getInt(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_CONCURSO)));
                 resultado.setData(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_DATE)));
                 resultado.setDezenas(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_NUMBERS)));
-
-                Log.d("Fabio", "History:" + resultado.getNumero());
 
                 mResults.add(resultado);
 

@@ -19,6 +19,10 @@ public class SplashActivity extends AppCompatActivity {
 
         //Utils.waiting();
 
+       /* Log.d("Fabio", "delete: " + ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2011").build());
+        int delete = getContentResolver().delete(ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2011").build(), null, null);
+*/
+
         try {
             Cursor cursor;
 
@@ -36,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     Intent intentDownload = new Intent(this, DownloadHistoryActivity.class);
                     startActivity(intentDownload);
+                    cursor.close();
                     finish();
 
                 } else {
@@ -50,6 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, MainActivity.class);
                     intent.putExtra(ResultsContract.ResultEntry.COLUMN_CONCURSO, lastResultinDB);
                     startActivity(intent);
+                    cursor.close();
                     finish();
                 }
             }

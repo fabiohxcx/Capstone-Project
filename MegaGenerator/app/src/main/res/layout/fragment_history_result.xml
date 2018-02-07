@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:bubbleColor="@color/colorPrimary"
-        app:bubbleTextColor="@color/colorAccent"
-        app:handleColor="#999999"
+        app:bubbleTextColor="@color/colorPrimaryLight"
+        app:handleColor="@color/divider"
         app:hideScrollbar="false"
         app:showTrack="false"
-        app:trackColor="#bbbbbb"
+        app:trackColor="@color/divider"
         tools:listitem="@layout/item_history_result" />
 </FrameLayout>
