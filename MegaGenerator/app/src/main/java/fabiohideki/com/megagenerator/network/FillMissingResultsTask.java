@@ -57,7 +57,7 @@ public class FillMissingResultsTask extends AsyncTask<Integer, String, Boolean> 
                 String mBaseUrlAPIMegasena = Utils.getUrlAPIMegasena();
 
                 if (mBaseUrlAPIMegasena != null) {
-                    
+
                     try {
                         for (int i = 1; i <= diff; i++) {
                             Log.d("Fabio", "doInBackground: " + mBaseUrlAPIMegasena + "&concurso=" + (lastResultInDB + i));

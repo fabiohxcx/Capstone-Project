@@ -1,6 +1,9 @@
 package fabiohideki.com.megagenerator.adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import com.l4digital.fastscroll.FastScroller;
 
 import java.util.List;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fabiohideki.com.megagenerator.R;
@@ -99,6 +103,24 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
         @BindView(R.id.bt_item_history_copy)
         ImageButton mItemCopy;
 
+        @BindString(R.string.result_copied)
+        String resultCopied;
+
+        @BindString(R.string.result)
+        String result;
+
+        @BindString(R.string.date)
+        String date;
+
+        @BindString(R.string.numbers)
+        String numbers;
+
+        @BindString(R.string.app_name)
+        String appName;
+
+        @BindString(R.string.megasena)
+        String megaSena;
+
 
         public ResultHistoryHolder(View itemView) {
             super(itemView);
@@ -112,13 +134,26 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
 
             int id = view.getId();
 
+            Resultado resultado = results.get(getAdapterPosition());
+
             if (id == R.id.bt_item_history_share) {
+
+
+                Intent intentShare = new Intent(Intent.ACTION_SEND);
+                intentShare.setType("text/plain");
+                intentShare.putExtra(Intent.EXTRA_SUBJECT, appName);
+                intentShare.putExtra(Intent.EXTRA_TEXT, result + " " + megaSena + ": " + resultado.getNumero() + " - " + date + ": " + resultado.getData() + " - " + numbers + ": " + resultado.getDezenas());
+                context.startActivity(intentShare);
 
                 Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.bt_item_history_copy) {
 
-                Toast.makeText(context, "Copy", Toast.LENGTH_SHORT).show();
+
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+
+                ClipData clip = ClipData.newPlainText(resultCopied, result + " " + megaSena + ": " + resultado.getNumero() + " - " + date + ": " + resultado.getData() + " - " + numbers + ": " + resultado.getDezenas());
+                clipboard.setPrimaryClip(clip);
 
             }
 

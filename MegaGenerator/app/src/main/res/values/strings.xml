@@ -47,6 +47,11 @@
 
     <!-- HistoryResultFragment -->
     <string name="item_title_concurso">Concurso</string>
+    <string name="result_copied">Sorteio Copiado</string>
+    <string name="result">Sorteio</string>
+    <string name="date">Data</string>
+    <string name="numbers">Números</string>
+    <string name="megasena">Mega-Sena</string>
 
 
 </resources>
