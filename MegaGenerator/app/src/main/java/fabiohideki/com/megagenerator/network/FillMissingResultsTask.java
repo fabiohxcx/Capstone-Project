@@ -57,11 +57,12 @@ public class FillMissingResultsTask extends AsyncTask<Integer, String, Boolean> 
                 String mBaseUrlAPIMegasena = Utils.getUrlAPIMegasena();
 
                 if (mBaseUrlAPIMegasena != null) {
+                    
+                    try {
+                        for (int i = 1; i <= diff; i++) {
+                            Log.d("Fabio", "doInBackground: " + mBaseUrlAPIMegasena + "&concurso=" + (lastResultInDB + i));
 
-                    for (int i = 1; i <= diff; i++) {
-                        Log.d("Fabio", "doInBackground: " + mBaseUrlAPIMegasena + "&concurso=" + (lastResultInDB + i));
 
-                        try {
                             Document apiDoc = Jsoup.connect(mBaseUrlAPIMegasena + "&concurso=" + (lastResultInDB + i))
                                     .header("Accept-Encoding", "gzip, deflate")
                                     .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36")
@@ -86,16 +87,22 @@ public class FillMissingResultsTask extends AsyncTask<Integer, String, Boolean> 
 
                             Log.d("Fabio", "doInBackground: uri inserted " + uriInserted);
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
 
+                        }
+                        cursor.close();
+                        return true;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        cursor.close();
+                        return false;
                     }
 
                 }
             }
         }
 
+        cursor.close();
         return false;
     }
 
