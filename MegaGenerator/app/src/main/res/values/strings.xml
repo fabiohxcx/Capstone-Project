@@ -53,5 +53,22 @@
     <string name="numbers">Números</string>
     <string name="megasena">Mega-Sena</string>
 
+    <!-- Generator Fragment -->
+    <string name="numbers_per_bet">Qtd. números por aposta</string>
+
+    <string name="number_bet_prompt">Quantidade</string>
+
+    <string-array name="number_bet_array">
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
 
 </resources>
