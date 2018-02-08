@@ -2,6 +2,8 @@ package fabiohideki.com.megagenerator.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.TreeSet;
+
 /**
  * Created by fabio.lagoa on 05/02/2018.
  */
@@ -16,6 +18,8 @@ public class Resultado {
 
     @SerializedName("resultadoOrdenado")
     private String dezenas;
+
+    private TreeSet<Integer> dezenasSet;
 
     public Resultado() {
     }
@@ -42,5 +46,18 @@ public class Resultado {
 
     public void setDezenas(String dezenas) {
         this.dezenas = dezenas;
+    }
+
+    public TreeSet<Integer> getDezenasSet() {
+
+        String[] dezenas = this.dezenas.split("-");
+
+        TreeSet<Integer> set = new TreeSet<>();
+
+        for (int i = 0; i < dezenas.length; i++) {
+            set.add(Integer.parseInt(dezenas[i]));
+        }
+
+        return set;
     }
 }

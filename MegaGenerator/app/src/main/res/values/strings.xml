@@ -71,4 +71,7 @@
         <item>15</item>
     </string-array>
 
+    <string name="reasonHistory6">6 dos números já cairam em um sorteio</string>
+    <string name="reasonHistory5">5 dos números já cairam em um sorteio</string>
+
 </resources>

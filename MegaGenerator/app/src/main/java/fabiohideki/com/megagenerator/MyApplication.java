@@ -1,6 +1,7 @@
 package fabiohideki.com.megagenerator;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.stetho.Stetho;
 
@@ -10,9 +11,16 @@ import com.facebook.stetho.Stetho;
 
 public class MyApplication extends Application {
 
+    private static Context mContext;
+
     public void onCreate() {
         super.onCreate();
         Stetho.initializeWithDefaults(this);
+        mContext = this;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 
 }
