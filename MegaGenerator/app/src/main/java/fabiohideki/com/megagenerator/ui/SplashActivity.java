@@ -18,10 +18,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Utils.waiting();
-
-       /* Log.d("Fabio", "delete: " + ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2011").build());
-        int delete = getContentResolver().delete(ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2011").build(), null, null);
-*/
+/*
+        Log.d("Fabio", "delete: " + ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2012").build());
+        int delete = getContentResolver().delete(ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath("2012").build(), null, null);*/
 
         try {
             Cursor cursor;

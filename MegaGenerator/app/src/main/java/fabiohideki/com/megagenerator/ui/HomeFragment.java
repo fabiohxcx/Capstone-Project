@@ -151,17 +151,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         // Required empty public constructor
     }
 
-
-/*    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (this.mUltimoResultado != null) {
-            outState.putParcelable(ON_SAVE_INSTANCE_STATE, Parcels.wrap(mUltimoResultado));
-        }
-
-    }*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -177,21 +166,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         mAdView.loadAd(adRequest);
 
         Log.d(TAG, "HomeFragment: onCreateView");
-
-      /*  if (savedInstanceState != null) {
-
-            mUltimoResultado = Parcels.unwrap(savedInstanceState.getParcelable(ON_SAVE_INSTANCE_STATE));
-
-            if (mUltimoResultado != null) {
-                setupCard(mUltimoResultado);
-            }
-
-        } else {
-            restartLoader();
-
-            Log.d("Fabio", "savedInstanceState null: HomeFrag");
-        }
-*/
 
         restartLoader();
         Log.d(TAG, "HomeFragment: onCreateView restartLoader()");
@@ -248,7 +222,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         mValorProxConcurso.setText(Utils.decimalFormat(Double.toString(ultimoResultado.getEstPremioProxConc())));
 
     }
-
 
     @OnClick(R.id.bt_card_share)
     public void submit(View view1) {
@@ -355,7 +328,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         Log.d(TAG, "HomeFragment: onStartTask");
         mBtRetry.setVisibility(View.INVISIBLE);
 
-        if (mAsyncTaskLoader != null && mUltimoResultado == null) {
+        if (mUltimoResultado == null) {
             rotateLoading.start();
             mAsyncTaskLoader.forceLoad();
         } else {

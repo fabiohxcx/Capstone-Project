@@ -9,13 +9,13 @@
             android:icon="@drawable/home_outline"
             android:title="@string/Home" />
         <item
-            android:id="@+id/nav_results"
-            android:icon="@drawable/newspaper"
-            android:title="@string/results" />
-        <item
             android:id="@+id/nav_generator"
             android:icon="@drawable/all_inclusive"
             android:title="@string/number_generator" />
+        <item
+            android:id="@+id/nav_results"
+            android:icon="@drawable/newspaper"
+            android:title="@string/results" />
         <item
             android:id="@+id/nav_near_lottery"
             android:icon="@drawable/map_marker_radius"

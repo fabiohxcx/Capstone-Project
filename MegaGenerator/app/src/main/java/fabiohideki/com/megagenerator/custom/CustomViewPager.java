@@ -40,4 +40,8 @@ public class CustomViewPager extends ViewPager {
         this.enabled = enabled;
     }
 
+    @Override
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        super.setCurrentItem(item, smoothScroll);
+    }
 }

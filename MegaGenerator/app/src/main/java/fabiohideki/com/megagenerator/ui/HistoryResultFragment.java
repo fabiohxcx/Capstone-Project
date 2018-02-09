@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.l4digital.fastscroll.FastScrollRecyclerView;
 
 import java.util.ArrayList;
@@ -32,10 +35,12 @@ public class HistoryResultFragment extends Fragment {
     @BindView(R.id.recyclerview_history)
     FastScrollRecyclerView mResultHistoryRecyclerView;
 
+    @BindView(R.id.adView)
+    AdView mAdView;
+
     List<Resultado> mResults = new ArrayList<>();
 
     private View rootView;
-
 
     public HistoryResultFragment() {
         // Required empty public constructor
@@ -47,6 +52,12 @@ public class HistoryResultFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_history_result, container, false);
         ButterKnife.bind(this, rootView);
+
+        MobileAds.initialize(getContext(), getString(R.string.AdMobAppID));
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         return rootView;
     }

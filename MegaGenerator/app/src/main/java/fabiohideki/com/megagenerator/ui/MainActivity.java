@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             mViewPager.setCurrentItem(0);
 
+        } else if (id == R.id.nav_generator) {
+            mViewPager.setCurrentItem(1);
+
         } else if (id == R.id.nav_results) {
             mViewPager.setCurrentItem(2);
 
-        } else if (id == R.id.nav_generator) {
-            mViewPager.setCurrentItem(3);
-
         } else if (id == R.id.nav_near_lottery) {
-            mViewPager.setCurrentItem(4);
+            mViewPager.setCurrentItem(3);
 
         } else if (id == R.id.nav_share) {
 
@@ -128,14 +128,11 @@ public class MainActivity extends AppCompatActivity
         }
         adapter.addFragment(mMainFragment);
 
-        PricesFragment pricesFragment = new PricesFragment();
-        adapter.addFragment(pricesFragment);
+        GeneratorFragment generatorFragment = new GeneratorFragment();
+        adapter.addFragment(generatorFragment);
 
         HistoryResultFragment historyResultFragment = new HistoryResultFragment();
         adapter.addFragment(historyResultFragment);
-
-        GeneratorFragment generatorFragment = new GeneratorFragment();
-        adapter.addFragment(generatorFragment);
 
         NearByLotteryFragment nearByLotteryFragment = new NearByLotteryFragment();
         adapter.addFragment(nearByLotteryFragment);
