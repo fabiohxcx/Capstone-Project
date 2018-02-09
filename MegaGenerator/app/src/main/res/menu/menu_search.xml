@@ -7,6 +7,6 @@
         android:iconTint="@color/white"
         android:title="@string/item_title_concurso"
         myapp:actionViewClass="android.support.v7.widget.SearchView"
-        myapp:showAsAction="ifRoom|collapseActionView" />
+        myapp:showAsAction="always" />
 
 </menu>

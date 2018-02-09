@@ -81,6 +81,7 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
         mAdView.loadAd(adRequest);
 
         setHasOptionsMenu(true);
+        resultsRepository = new ResultsRepository();
 
         return rootView;
     }
@@ -94,7 +95,6 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
             mCurrentSearch = savedInstanceState.getString(INSTANCE);
 
         } else {
-            resultsRepository = new ResultsRepository();
             mResults = resultsRepository.listAll(getContext());
 
             if (mResults != null && mResults.size() > 0) {
@@ -145,18 +145,42 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(final Menu menu) {
+        super.onPrepareOptionsMenu(menu);
 
         if (mCurrentSearch != null) {
             Log.d("Fabio", "onActivityCreated: " + mCurrentSearch);
+            //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
+            //menu.findItem(R.id.action_search).expandActionView();
+            //searchView.setQuery(mCurrentSearch, true);
+
+           /* searchView.post(new Runnable() {
+                @Override
+                public void run() {
+                    //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
+                    //menu.findItem(R.id.action_search).expandActionView();
+                    searchView.onActionViewExpanded();
+                    searchView.setQuery(mCurrentSearch, true);
+                }
+            });*/
+
+
+            //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
             searchView.setQuery(mCurrentSearch, true);
+            //searchView.onActionViewExpanded();
+            searchView.setIconified(false);
+            searchView.clearFocus();
+
         }
 
-        super.onPrepareOptionsMenu(menu);
+
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+
+        onQueryTextChange(query);
+
         return false;
     }
 
@@ -178,6 +202,6 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
             resultHistoryAdapter.setResults(mResults);
         }
 
-        return true;
+        return false;
     }
 }
