@@ -148,26 +148,10 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
     public void onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        if (mCurrentSearch != null) {
+        if (mCurrentSearch != null && !TextUtils.isEmpty(mCurrentSearch)) {
             Log.d("Fabio", "onActivityCreated: " + mCurrentSearch);
-            //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
-            //menu.findItem(R.id.action_search).expandActionView();
-            //searchView.setQuery(mCurrentSearch, true);
 
-           /* searchView.post(new Runnable() {
-                @Override
-                public void run() {
-                    //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
-                    //menu.findItem(R.id.action_search).expandActionView();
-                    searchView.onActionViewExpanded();
-                    searchView.setQuery(mCurrentSearch, true);
-                }
-            });*/
-
-
-            //MenuItemCompat.expandActionView(menu.findItem(R.id.action_search));
             searchView.setQuery(mCurrentSearch, true);
-            //searchView.onActionViewExpanded();
             searchView.setIconified(false);
             searchView.clearFocus();
 
