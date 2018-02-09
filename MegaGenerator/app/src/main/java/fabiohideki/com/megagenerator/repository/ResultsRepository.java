@@ -2,6 +2,8 @@ package fabiohideki.com.megagenerator.repository;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,43 @@ public class ResultsRepository {
             }
         }
 
+        return null;
+    }
+
+
+    public Resultado getByNumber(int number, Context context) {
+
+        Cursor cursor;
+
+        Uri uri = ResultsContract.ResultEntry.CONTENT_URI.buildUpon().appendPath(Integer.toString(number)).build();
+
+        Log.d("Fabio", "getByNumber: uri:" + uri);
+
+        cursor = context.getContentResolver().query(uri,
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor != null) {
+
+            if (cursor.moveToFirst()) {
+
+                Resultado resultado = new Resultado();
+                resultado.setNumero(cursor.getInt(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_CONCURSO)));
+                resultado.setData(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_DATE)));
+                resultado.setDezenas(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_NUMBERS)));
+
+                Log.d("Fabio", "getByNumber: " + resultado.getNumero());
+
+                cursor.close();
+                return resultado;
+
+            }
+
+        }
+
+        cursor.close();
         return null;
     }
 

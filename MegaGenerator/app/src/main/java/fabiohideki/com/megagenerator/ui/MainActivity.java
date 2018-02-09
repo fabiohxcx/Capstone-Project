@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity
 
     private MainFragment mMainFragment;
 
+    private HistoryResultFragment mHistoryResultFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -131,8 +133,11 @@ public class MainActivity extends AppCompatActivity
         GeneratorFragment generatorFragment = new GeneratorFragment();
         adapter.addFragment(generatorFragment);
 
-        HistoryResultFragment historyResultFragment = new HistoryResultFragment();
-        adapter.addFragment(historyResultFragment);
+        if (mHistoryResultFragment == null) {
+            mHistoryResultFragment = new HistoryResultFragment();
+            mHistoryResultFragment.setRetainInstance(true);
+        }
+        adapter.addFragment(mHistoryResultFragment);
 
         NearByLotteryFragment nearByLotteryFragment = new NearByLotteryFragment();
         adapter.addFragment(nearByLotteryFragment);

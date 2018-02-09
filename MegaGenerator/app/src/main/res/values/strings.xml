@@ -52,6 +52,7 @@
     <string name="date">Data</string>
     <string name="numbers">Números</string>
     <string name="megasena">Mega-Sena</string>
+    <string name="search_hint">ex: 1700</string>
 
     <!-- Generator Fragment -->
     <string name="numbers_per_bet">Qtd. números por aposta</string>

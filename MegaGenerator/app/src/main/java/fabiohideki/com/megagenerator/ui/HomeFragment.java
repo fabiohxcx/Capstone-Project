@@ -378,7 +378,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private void restartLoader() {
         Log.d(TAG, "HomeFragment: restartLoader");
-        mAsyncTaskLoader = getLoaderManager().initLoader(MEGASEGA_ULTIMO_RESULTADO_LOADER, null, HomeFragment.this);
+        mAsyncTaskLoader = getLoaderManager().restartLoader(MEGASEGA_ULTIMO_RESULTADO_LOADER, null, HomeFragment.this);
     }
 
 }

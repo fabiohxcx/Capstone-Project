@@ -115,8 +115,8 @@ public class ResultsContentProvider extends ContentProvider {
 
                 retCursor = db.query(TABLE_NAME,
                         projection,
-                        selection,
-                        selectionArgs,
+                        mSelection,
+                        mSelectionArgs,
                         null,
                         null,
                         sortOrder);
