@@ -34,8 +34,13 @@ public class MainActivity extends AppCompatActivity
 
     private ViewPagerStateAdapter adapter = new ViewPagerStateAdapter(getSupportFragmentManager());
 
+    private MainFragment mMainFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.d("Fabio", "MainActivity: onCreate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -53,7 +58,6 @@ public class MainActivity extends AppCompatActivity
         mViewPager.setPagingEnabled(false);
         mViewPager.setOffscreenPageLimit(1);
 
-        Log.d("Fabio", "onCreate: MainActivity");
     }
 
     @Override
@@ -118,9 +122,11 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager() {
 
-
-        MainFragment mainFragment = new MainFragment();
-        adapter.addFragment(mainFragment);
+        if (mMainFragment == null) {
+            mMainFragment = new MainFragment();
+            mMainFragment.setRetainInstance(true);
+        }
+        adapter.addFragment(mMainFragment);
 
         PricesFragment pricesFragment = new PricesFragment();
         adapter.addFragment(pricesFragment);

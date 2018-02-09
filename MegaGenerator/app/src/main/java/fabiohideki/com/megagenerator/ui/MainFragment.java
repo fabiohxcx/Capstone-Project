@@ -35,6 +35,10 @@ public class MainFragment extends Fragment {
     @BindView(R.id.viewpager)
     CustomViewPager mViewPager;
 
+    private HomeFragment mHomeFragment;
+
+    private NewsFragment mNewsFragment;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -54,7 +58,6 @@ public class MainFragment extends Fragment {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         setupViewPager(mViewPager);
         mViewPager.setPagingEnabled(false);
 
@@ -65,11 +68,18 @@ public class MainFragment extends Fragment {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        HomeFragment homeFragment = new HomeFragment();
-        adapter.addFragment(homeFragment, mTitleHome);
+        if (mHomeFragment == null) {
+            mHomeFragment = new HomeFragment();
+            mHomeFragment.setRetainInstance(true);
+        }
 
-        NewsFragment newsFragment = new NewsFragment();
-        adapter.addFragment(newsFragment, mTitleNews);
+        adapter.addFragment(mHomeFragment, mTitleHome);
+
+        if (mNewsFragment == null) {
+            mNewsFragment = new NewsFragment();
+            mNewsFragment.setRetainInstance(true);
+        }
+        adapter.addFragment(mNewsFragment, mTitleNews);
 
         viewPager.setAdapter(adapter);
     }

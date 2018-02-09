@@ -30,8 +30,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.victor.loading.rotate.RotateLoading;
 
-import org.parceler.Parcels;
-
 import java.io.File;
 
 import butterknife.BindString;
@@ -138,22 +136,23 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static final int REQUEST = 112;
 
-    private static final String ON_SAVE_INSTANCE_STATE = "onSaveInstanceState";
-
     private Context context;
-
-    private final String TAG = getClass().getSimpleName();
 
     private View rootView;
 
     private UltimoResultado mUltimoResultado = null;
 
+    private static String TAG = "Fabio";
+
+    private Loader<UltimoResultado> mAsyncTaskLoader;
+
     public HomeFragment() {
+        Log.d(TAG, "HomeFragment: ");
         // Required empty public constructor
     }
 
 
-    @Override
+/*    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
@@ -161,7 +160,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
             outState.putParcelable(ON_SAVE_INSTANCE_STATE, Parcels.wrap(mUltimoResultado));
         }
 
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -177,9 +176,9 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        Log.d("Fabio", "onCreateView: HomeFrag");
+        Log.d(TAG, "HomeFragment: onCreateView");
 
-        if (savedInstanceState != null) {
+      /*  if (savedInstanceState != null) {
 
             mUltimoResultado = Parcels.unwrap(savedInstanceState.getParcelable(ON_SAVE_INSTANCE_STATE));
 
@@ -192,8 +191,10 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
             Log.d("Fabio", "savedInstanceState null: HomeFrag");
         }
+*/
 
-        Log.d("Fabio", "onActivityCreated: HomeFrag");
+        restartLoader();
+        Log.d(TAG, "HomeFragment: onCreateView restartLoader()");
 
         mBtRetry.setVisibility(View.INVISIBLE);
 
@@ -306,19 +307,22 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @OnClick(R.id.bt_retry)
     public void retry(View view) {
+        Log.d(TAG, "HomeFragment: retry");
         restartLoader();
     }
 
+
     @Override
     public Loader<UltimoResultado> onCreateLoader(int id, Bundle args) {
-
+        Log.d(TAG, "HomeFragment: onCreateLoader");
         return new UltimoResultadoAsyncTaskLoader(context, this);
     }
 
     @Override
     public void onLoadFinished(Loader<UltimoResultado> loader, UltimoResultado
             ultimoResultado) {
-        Log.d("Fabio", "onLoadFinished: ");
+
+        Log.d(TAG, "HomeFragment: onLoadFinished");
 
         if (ultimoResultado != null) {
 
@@ -334,43 +338,42 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void checkMissingResults(UltimoResultado mUltimoResultado) {
-
+        Log.d(TAG, "HomeFragment: checkMissingResults");
         FillMissingResultsTask missingResultsTask = new FillMissingResultsTask(context, mUltimoResultado.getNroConcurso());
         missingResultsTask.execute();
 
-
-        //Todo implement this check
     }
 
     @Override
     public void onLoaderReset(Loader<UltimoResultado> loader) {
-
+        Log.d(TAG, "HomeFragment: onLoaderReset");
     }
 
 
     @Override
     public void onStartTask() {
-        Log.d("Fabio", "onStartTask: ");
-
+        Log.d(TAG, "HomeFragment: onStartTask");
         mBtRetry.setVisibility(View.INVISIBLE);
 
-        if (rotateLoading.isStart()) {
-            rotateLoading.stop();
-        } else {
+        if (mAsyncTaskLoader != null && mUltimoResultado == null) {
             rotateLoading.start();
+            mAsyncTaskLoader.forceLoad();
+        } else {
+            mAsyncTaskLoader.deliverResult(mUltimoResultado);
         }
 
     }
 
     @Override
     public void onTaskCompleted() {
-        Log.d("Fabio", "onTaskCompleted: ");
+        Log.d(TAG, "HomeFragment: onTaskCompleted");
 
         rotateLoading.stop();
     }
 
     @Override
     public void onTaskError() {
+        Log.d(TAG, "HomeFragment: onTaskError");
         rotateLoading.stop();
 
         Snackbar snackbar = Snackbar.make(rootView, mNetworkErrorLabel, Snackbar.LENGTH_LONG);
@@ -389,6 +392,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         snackbar.setAction(mRetryLabel, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "HomeFragment: snackbar onClick");
                 restartLoader();
             }
         });
@@ -400,7 +404,8 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
     }
 
     private void restartLoader() {
-        getLoaderManager().restartLoader(MEGASEGA_ULTIMO_RESULTADO_LOADER, null, HomeFragment.this);
+        Log.d(TAG, "HomeFragment: restartLoader");
+        mAsyncTaskLoader = getLoaderManager().initLoader(MEGASEGA_ULTIMO_RESULTADO_LOADER, null, HomeFragment.this);
     }
 
 }

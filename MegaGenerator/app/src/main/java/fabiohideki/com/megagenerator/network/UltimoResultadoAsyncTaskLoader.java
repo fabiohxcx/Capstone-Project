@@ -29,13 +29,14 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
         this.listener = listener;
     }
 
+
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
         Log.d("Fabio", "onStartLoading: ");
 
-        forceLoad();
         listener.onStartTask();
+
     }
 
     @Override

@@ -74,6 +74,12 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
         return results.get(position).getNumero() + "";
     }
 
+
+    public void setResults(List<Resultado> results) {
+        this.results = results;
+        notifyDataSetChanged();
+    }
+
     public class ResultHistoryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.bola1)
