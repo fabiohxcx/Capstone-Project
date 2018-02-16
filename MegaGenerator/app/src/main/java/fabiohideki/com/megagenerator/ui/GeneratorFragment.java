@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -47,6 +48,9 @@ public class GeneratorFragment extends Fragment {
     @BindView(R.id.cb_refuse_sequence)
     CheckBox mCheckBoxRefuseSequence;
 
+    @BindView(R.id.pb_generator_screen)
+    ProgressBar mProgressBar;
+
     private int mBets;
     private int mNumberPerBets;
     private boolean mCheckHistory;
@@ -77,6 +81,8 @@ public class GeneratorFragment extends Fragment {
 
     @OnClick(R.id.bt_generate)
     public void generate(View view) {
+
+        mProgressBar.setVisibility(View.VISIBLE);
 
         mBets = Integer.parseInt((String) mSpinnerBets.getSelectedItem());
         mNumberPerBets = Integer.parseInt((String) mSpinnerNumbersPerBet.getSelectedItem());
@@ -114,6 +120,7 @@ public class GeneratorFragment extends Fragment {
         }
 
         mCardViewResult.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
 
     }
 
