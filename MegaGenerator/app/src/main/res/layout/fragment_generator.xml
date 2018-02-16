@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     tools:context="fabiohideki.com.megagenerator.ui.GeneratorFragment">
 
     <LinearLayout
@@ -22,7 +21,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tv_number_per_bet"
+                    android:id="@+id/tv_number_per_bet_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_less"
@@ -30,7 +29,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/numbers_per_bet"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_bets_label" />
 
                 <Button
                     android:id="@+id/bt_generate"
@@ -49,18 +48,18 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <Spinner
-                    android:id="@+id/spinner_numbers_per_bet"
+                    android:id="@+id/spin_numbers_per_bet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:entries="@array/number_bet_array"
                     android:prompt="@string/number_bet_prompt"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_per_bet"
-                    app:layout_constraintStart_toEndOf="@+id/tv_number_per_bet"
-                    app:layout_constraintTop_toTopOf="@+id/tv_number_per_bet" />
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_per_bet_label"
+                    app:layout_constraintStart_toEndOf="@+id/tv_number_per_bet_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_number_per_bet_label" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_number_bets_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -70,36 +69,37 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="50dp"
+                    android:id="@+id/spin_bets"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toTopOf="@+id/textView2" />
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_bets_label"
+                    app:layout_constraintStart_toEndOf="@+id/tv_number_bets_label"
+                    app:layout_constraintTop_toTopOf="@+id/tv_number_bets_label" />
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/cb_refuse_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:checked="true"
                     android:text="Recusar jogos que já foram sorteados"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_number_per_bet" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_per_bet_label" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/cb_refuse_sequence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:checked="true"
                     android:text="Recusar jogos com números em sequência"
                     app:layout_constraintBottom_toTopOf="@+id/bt_generate"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+                    app:layout_constraintTop_toBottomOf="@+id/cb_refuse_history" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -109,7 +109,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/card_result"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_less"
             android:visibility="gone"
             app:cardBackgroundColor="@color/colorPrimaryLight">
@@ -117,8 +117,7 @@
             <TextView
                 android:id="@+id/tv_result_test"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Result" />
+                android:layout_height="match_parent" />
         </android.support.v7.widget.CardView>
 
 

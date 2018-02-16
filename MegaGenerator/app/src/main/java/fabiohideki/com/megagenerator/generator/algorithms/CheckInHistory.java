@@ -45,9 +45,11 @@ public class CheckInHistory implements ValidationAlgorithmsInterface {
                 betCandidate.addReason(reason6 + reasonSuffix);
             }
 
-            if (intercession.size() == 5) {
-                betCandidate.setRefused(true);
-                betCandidate.addReason(reason5 + reasonSuffix);
+            if (betCandidate.getBalls().size() < 11) {
+                if (intercession.size() == 5) {
+                    betCandidate.setRefused(true);
+                    betCandidate.addReason(reason5 + reasonSuffix);
+                }
             }
 
         }

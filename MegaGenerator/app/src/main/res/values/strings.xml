@@ -74,5 +74,6 @@
 
     <string name="reasonHistory6">6 dos números já cairam em um sorteio</string>
     <string name="reasonHistory5">5 dos números já cairam em um sorteio</string>
+    <string name="reasonSequenceHorizontal">Há uma sequência de 3 ou mais números</string>
 
 </resources>

@@ -7,8 +7,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,22 +21,35 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fabiohideki.com.megagenerator.R;
 import fabiohideki.com.megagenerator.generator.BetGenerator;
-import fabiohideki.com.megagenerator.generator.NumberGenerator;
 import fabiohideki.com.megagenerator.generator.algorithms.CheckInHistory;
+import fabiohideki.com.megagenerator.generator.algorithms.CheckSequenceHorizontal;
 import fabiohideki.com.megagenerator.generator.model.BetCandidate;
 import fabiohideki.com.megagenerator.model.Resultado;
 import fabiohideki.com.megagenerator.repository.ResultsRepository;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GeneratorFragment extends Fragment {
 
     @BindView(R.id.card_result)
-    CardView cardViewResult;
+    CardView mCardViewResult;
 
     @BindView(R.id.tv_result_test)
-    TextView tvResult;
+    TextView mTvResult;
+
+    @BindView(R.id.spin_bets)
+    Spinner mSpinnerBets;
+
+    @BindView(R.id.spin_numbers_per_bet)
+    Spinner mSpinnerNumbersPerBet;
+
+    @BindView(R.id.cb_refuse_history)
+    CheckBox mCheckBoxRefuseHistory;
+
+    @BindView(R.id.cb_refuse_sequence)
+    CheckBox mCheckBoxRefuseSequence;
+
+    private int mBets;
+    private int mNumberPerBets;
+    private boolean mCheckHistory;
 
     public GeneratorFragment() {
         // Required empty public constructor
@@ -46,43 +60,60 @@ public class GeneratorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_generator, container, false);
-
         ButterKnife.bind(this, rootView);
-        // Inflate the layout for this fragment
+
+        List<String> list = new ArrayList<>();
+
+        for (int i = 1; i <= 20; i++) {
+            list.add(Integer.toString(i));
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerBets.setAdapter(dataAdapter);
+
         return rootView;
     }
 
     @OnClick(R.id.bt_generate)
     public void generate(View view) {
 
+        mBets = Integer.parseInt((String) mSpinnerBets.getSelectedItem());
+        mNumberPerBets = Integer.parseInt((String) mSpinnerNumbersPerBet.getSelectedItem());
+        mCheckHistory = mCheckBoxRefuseHistory.isChecked();
 
-        int number = NumberGenerator.generate(null);
+        mTvResult.setText("");
 
-        List<Integer> lista = new ArrayList<>();
+        for (int i = 0; i < mBets; i++) {
 
-        TreeSet<Integer> balls = BetGenerator.generate(10, lista);
+            List<Integer> lista = new ArrayList<>();
 
-        BetCandidate candidate = new BetCandidate();
-        candidate.setBalls(balls);
+            TreeSet<Integer> balls = BetGenerator.generate(mNumberPerBets, lista);
 
-        ResultsRepository resultsRepository = new ResultsRepository();
+            BetCandidate candidate = new BetCandidate();
+            candidate.setBalls(balls);
 
-        List<Resultado> resultados = resultsRepository.listAll(getContext());
+            ResultsRepository resultsRepository = new ResultsRepository();
 
-        CheckInHistory checkInHistory = new CheckInHistory(resultados);
+            List<Resultado> resultados = resultsRepository.listAll(getContext());
 
-        checkInHistory.execute(candidate);
+            if (mCheckHistory) {
+                CheckInHistory checkInHistory = new CheckInHistory(resultados);
+                checkInHistory.execute(candidate);
+            }
 
-        tvResult.setText(candidate.getBalls().toString() + "\n" +
-                candidate.isRefused() + "\n" +
-                candidate.getRefusedReasons().toString());
+            if (mCheckBoxRefuseSequence.isChecked()) {
+                CheckSequenceHorizontal checkSequenceHorizontal = new CheckSequenceHorizontal();
+                checkSequenceHorizontal.execute(candidate);
+            }
 
-        Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+            mTvResult.append(candidate.getBalls().toString() + "\n" +
+                    candidate.isRefused() + "\n" +
+                    candidate.getRefusedReasons().toString() + "\n\n");
 
-        if (cardViewResult.getVisibility() == View.GONE) {
-            cardViewResult.setVisibility(View.VISIBLE);
-            cardViewResult.startAnimation(slideUp);
         }
+
+        mCardViewResult.setVisibility(View.VISIBLE);
 
     }
 

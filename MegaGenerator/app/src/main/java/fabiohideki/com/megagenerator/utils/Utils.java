@@ -176,7 +176,11 @@ public class Utils {
         final String URL_MEGASENA = "http://loterias.caixa.gov.br/wps/portal/loterias/landing/megasena/";
 
         try {
-            Document docWebPageMegasena = Jsoup.connect(URL_MEGASENA).get();
+            Document docWebPageMegasena = Jsoup.connect(URL_MEGASENA)
+                    .header("Accept-Encoding", "gzip, deflate")
+                    .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36")
+                    .maxBodySize(0)
+                    .timeout(60000).get();
 
             String baseURL = docWebPageMegasena.select("head > base").attr("href");
             String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
