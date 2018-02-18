@@ -17,7 +17,6 @@ public class BetGenerator {
         TreeSet<Integer> balls = new TreeSet<Integer>();
         Random random = new Random();
 
-
         while (balls.size() < numberOfBalls) {
             int ball = NumberGenerator.generate(random);
             Log.d("Fabio", "generate: " + ball);
