@@ -1,9 +1,11 @@
 package fabiohideki.com.megagenerator.ui;
 
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,9 +43,6 @@ public class GeneratorFragment extends Fragment {
     @BindView(R.id.card_result)
     CardView mCardViewResult;
 
-    @BindView(R.id.tv_result_test)
-    TextView mTvResult;
-
     @BindView(R.id.spin_bets)
     Spinner mSpinnerBets;
 
@@ -54,6 +57,9 @@ public class GeneratorFragment extends Fragment {
 
     @BindView(R.id.pb_generator_screen)
     ProgressBar mProgressBar;
+
+    @BindView(R.id.bt_refused_bets_generated)
+    ImageView mIVRefusedBetsGenerated;
 
     private int mBets;
     private int mNumberPerBets;
@@ -104,7 +110,7 @@ public class GeneratorFragment extends Fragment {
             super.onPreExecute();
             mProgressBar.setVisibility(View.VISIBLE);
             mCardViewResult.setVisibility(View.GONE);
-            mTvResult.setText("");
+            mIVRefusedBetsGenerated.setVisibility(View.GONE);
         }
 
         @Override
@@ -122,6 +128,7 @@ public class GeneratorFragment extends Fragment {
 
             int counter = 0;
             while (counter < mBets) {
+
                 //create Bet Candidate with Random Balls
                 TreeSet<Integer> balls = BetGenerator.generate(mNumberPerBets, null);
                 BetCandidate candidate = new BetCandidate();
@@ -165,39 +172,71 @@ public class GeneratorFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-
-            LinearLayout generatedBetsList = (LinearLayout) rootView.findViewById(R.id.ll_bet_items_generated);
-            generatedBetsList.removeAllViews();
-
-            for (int i = 0; i < candidatesPassed.size(); i++) {
-                BetCandidate betCandidate = candidatesPassed.get(i);
-
-                View itemGenerated = getActivity().getLayoutInflater().inflate(R.layout.item_bet_generated, null);
-
-                TextView textViewTitleItem = itemGenerated.findViewById(R.id.tv_title_number_bet_generated);
-                textViewTitleItem.append("" + (i + 1));
-                LinearLayout linearLayoutItemGenerated = itemGenerated.findViewById(R.id.ll_balls_generated);
-
-
-                Iterator<Integer> iterador = betCandidate.getBalls().iterator();
-
-                while (iterador.hasNext()) {
-                    int number = iterador.next();
-
-                    View ball = getActivity().getLayoutInflater().inflate(R.layout.ball, (ViewGroup) itemGenerated, false);
-                    ((TextView) ball).setText("" + number);
-                    linearLayoutItemGenerated.addView(ball);
-
-                }
-
-                generatedBetsList.addView(itemGenerated);
+            if (candidatesRefused.size() > 0) {
+                mIVRefusedBetsGenerated.setVisibility(View.VISIBLE);
             }
 
-            //mTvResult.setText(result);
-            mCardViewResult.setVisibility(View.VISIBLE);
-            mProgressBar.setVisibility(View.GONE);
+            if (candidatesPassed.size() > 0) {
+
+                LinearLayout generatedBetsList = (LinearLayout) rootView.findViewById(R.id.ll_bet_items_generated);
+                generatedBetsList.removeAllViews();
+
+                for (int i = 0; i < candidatesPassed.size(); i++) {
+                    BetCandidate betCandidate = candidatesPassed.get(i);
+
+                    View itemGenerated = getActivity().getLayoutInflater().inflate(R.layout.item_bet_generated, (ViewGroup) rootView, false);
+
+                    TextView textViewTitleItem = itemGenerated.findViewById(R.id.tv_title_number_bet_generated);
+                    textViewTitleItem.append("" + (i + 1));
+                    FlowLayout linearLayoutItemGenerated = itemGenerated.findViewById(R.id.ll_balls_generated);
+
+
+                    Iterator<Integer> iterador = betCandidate.getBalls().iterator();
+
+                    while (iterador.hasNext()) {
+                        int number = iterador.next();
+
+                        View ball = getActivity().getLayoutInflater().inflate(R.layout.ball, (ViewGroup) itemGenerated, false);
+                        ((TextView) ball).setText("" + number);
+                        linearLayoutItemGenerated.addView(ball);
+                    }
+
+                    generatedBetsList.addView(itemGenerated);
+                }
+
+                mCardViewResult.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
+            }
         }
     }
 
+    @OnClick(R.id.bt_refused_bets_generated)
+    public void showRefusedBetsGenerated(View view) {
+        Toast.makeText(getContext(), "refused: " + candidatesRefused.size(), Toast.LENGTH_SHORT).show();
+
+        AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+        ad.setIcon(R.drawable.alert_circle);
+
+        View contentDialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_refused_bets_generated, null);
+
+        TextView textViewRefusedContent = contentDialogView.findViewById(R.id.tv_refused_content);
+
+        for (int i = 0; i < candidatesRefused.size(); i++) {
+            textViewRefusedContent.append("#" + (i + 1) + "\n" +
+                    candidatesRefused.get(i).getBalls().toString() + "\n" +
+                    getString(R.string.reason) + ": " + candidatesRefused.get(i).getRefusedReasons().toString() + "\n\n");
+        }
+
+        ad.setPositiveButton(getString(R.string.ok),
+                new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        // nothing to do
+                    }
+                }
+        );
+
+        ad.setView(contentDialogView);
+        ad.show();
+    }
 
 }

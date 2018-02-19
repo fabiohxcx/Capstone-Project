@@ -81,4 +81,8 @@ dependencies {
 
     //https://mvnrepository.com/artifact/commons-io/commons-io
     compile group: 'commons-io', name: 'commons-io', version: '2.4'
+
+    //https://github.com/ApmeM/android-flowlayout
+    compile 'org.apmem.tools:layouts:1.10@aar'
+
 }

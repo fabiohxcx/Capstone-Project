@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_bet_item_generated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,12 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bet_generated_number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <org.apmem.tools.layouts.FlowLayout
         android:id="@+id/ll_balls_generated"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,10 +27,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_number_bet_generated">
-
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_number_bet_generated" />
 
 
 </android.support.constraint.ConstraintLayout>

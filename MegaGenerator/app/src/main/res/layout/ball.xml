@@ -9,6 +9,6 @@
     android:layout_marginStart="8dp"
     android:background="@drawable/bola"
     android:gravity="center"
-    android:textColor="@color/colorPrimary"
+    android:textColor="@color/colorPrimaryDark"
     android:textStyle="bold"
     tools:text="01" />

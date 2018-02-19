@@ -56,7 +56,6 @@
 
     <!-- Generator Fragment -->
     <string name="numbers_per_bet">Qtd. números por aposta</string>
-
     <string name="number_bet_prompt">Quantidade</string>
 
     <string-array name="number_bet_array">
@@ -72,9 +71,12 @@
         <item>15</item>
     </string-array>
 
+    <string name="reason">Motivo</string>
     <string name="reasonHistory6">6 dos números já cairam em um sorteio</string>
     <string name="reasonHistory5">5 dos números já cairam em um sorteio</string>
     <string name="reasonSequenceHorizontal">Há uma sequência de 3 ou mais números</string>
     <string name="bet_generated_number">Aposta #</string>
+    <string name="bet_generated_refused">Apostas geradas recusadas</string>
+    <string name="ok">OK</string>
 
 </resources>
