@@ -60,6 +60,10 @@ dependencies {
     //AdMob
     compile 'com.google.android.gms:play-services-ads:11.8.0'
 
+    compile('com.google.android.gms:play-services:11.8.0') {
+        exclude group: 'com.android.support', module: 'mediarouter-v7'
+    }
+
     //https://github.com/google/gson
     compile 'com.google.code.gson:gson:2.8.2'
 
