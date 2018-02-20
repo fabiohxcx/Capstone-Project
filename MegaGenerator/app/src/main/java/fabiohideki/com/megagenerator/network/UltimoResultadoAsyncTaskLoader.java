@@ -10,6 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import fabiohideki.com.megagenerator.model.UltimoResultado;
 import fabiohideki.com.megagenerator.utils.Utils;
@@ -69,6 +70,10 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
 
                 return ultimoResultado;
 
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
 
             } catch (IOException e) {
                 e.printStackTrace();

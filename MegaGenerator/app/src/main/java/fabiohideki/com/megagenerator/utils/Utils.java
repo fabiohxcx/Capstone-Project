@@ -3,6 +3,7 @@ package fabiohideki.com.megagenerator.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -14,6 +15,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -185,13 +187,16 @@ public class Utils {
             String baseURL = docWebPageMegasena.select("head > base").attr("href");
             String urlBuscarResultado = docWebPageMegasena.select("#urlBuscarResultado").attr("value");
 
-            if (baseURL != null && urlBuscarResultado != null) {
+            if (!TextUtils.isEmpty(baseURL) && !TextUtils.isEmpty(urlBuscarResultado)) {
 
                 Log.d("Fabio", "getUrlAPIMegasena: " + baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis());
 
                 return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
             }
 
+        } catch (SocketException e) {
+            e.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;

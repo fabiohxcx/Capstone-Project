@@ -79,4 +79,10 @@
     <string name="bet_generated_refused">Apostas geradas recusadas</string>
     <string name="ok">OK</string>
 
+    <!-- NearByLotteryFragment -->
+    <string name="distance">Distância</string>
+    <string name="updating_location">Atualizando sua localização</string>
+    <string name="km_label">km</string>
+    <string name="meters_label">m</string>
+
 </resources>

@@ -16,10 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAxHqzQJHTiYmnJT3dYbu2hK3VqCV9mzNc" />
-
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
