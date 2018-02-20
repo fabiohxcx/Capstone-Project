@@ -160,17 +160,35 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/bt_refused_bets_generated"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                <LinearLayout
+                    android:id="@+id/ll_buttons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/alert_circle"
-                    android:visibility="gone"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/bt_copy_bets_generated"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="@dimen/margin_less"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/content_copy"
+                        android:tint="@color/white"
+                        android:visibility="visible" />
+
+                    <ImageButton
+                        android:id="@+id/bt_refused_bets_generated"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/alert_circle"
+                        android:visibility="gone" />
+
+                </LinearLayout>
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>

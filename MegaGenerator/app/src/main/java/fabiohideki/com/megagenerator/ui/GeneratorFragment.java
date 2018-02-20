@@ -1,6 +1,9 @@
 package fabiohideki.com.megagenerator.ui;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apmem.tools.layouts.FlowLayout;
 
@@ -68,6 +70,8 @@ public class GeneratorFragment extends Fragment {
 
     private List<BetCandidate> candidatesPassed = new ArrayList<>();
     private List<BetCandidate> candidatesRefused = new ArrayList<>();
+
+    private String mBetsGenerated;
 
     public GeneratorFragment() {
         // Required empty public constructor
@@ -153,9 +157,7 @@ public class GeneratorFragment extends Fragment {
                     candidatesPassed.add(candidate);
                     counter++;
 
-                    stringBuilder.append(candidate.getBalls().toString() + "\n" +
-                            candidate.isRefused() + "\n" +
-                            candidate.getRefusedReasons().toString() + "\n\n");
+                    stringBuilder.append("#" + counter + " - " + candidate.getBalls().toString() + "\n");
 
                     Log.d("Fabio", "passed: " + candidate.getBalls().toString());
                 } else {
@@ -171,6 +173,8 @@ public class GeneratorFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
+            mBetsGenerated = result;
 
             if (candidatesRefused.size() > 0) {
                 mIVRefusedBetsGenerated.setVisibility(View.VISIBLE);
@@ -212,7 +216,6 @@ public class GeneratorFragment extends Fragment {
 
     @OnClick(R.id.bt_refused_bets_generated)
     public void showRefusedBetsGenerated(View view) {
-        Toast.makeText(getContext(), "refused: " + candidatesRefused.size(), Toast.LENGTH_SHORT).show();
 
         AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
         ad.setIcon(R.drawable.alert_circle);
@@ -237,6 +240,15 @@ public class GeneratorFragment extends Fragment {
 
         ad.setView(contentDialogView);
         ad.show();
+    }
+
+    @OnClick(R.id.bt_copy_bets_generated)
+    public void copyGeneratedBets(View view) {
+        if (mBetsGenerated != null) {
+            ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("", mBetsGenerated);
+            clipboard.setPrimaryClip(clip);
+        }
     }
 
 }
