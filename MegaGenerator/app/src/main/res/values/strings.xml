@@ -59,6 +59,11 @@
     <!-- Generator Fragment -->
     <string name="numbers_per_bet">Qtd. números por aposta</string>
     <string name="number_bet_prompt">Quantidade</string>
+    <string name="generate">Gerar</string>
+    <string name="number_bets">Qtd. Apostas</string>
+    <string name="refuse_bet_already_drawn">Recusar jogos que já foram sorteados</string>
+    <string name="refuse_number_sequence">Recusar jogos com números em sequência</string>
+    <string name="generated_bets">Jogos Gerados</string>
 
     <string-array name="number_bet_array">
         <item>6</item>
@@ -132,5 +137,17 @@ Todas as informações são retiradas do site: <a href=\"http://loterias.caixa.g
 <p>Desenvolvido por: <a href=\"mailto:hideki.fabio@gmail.com\">Fábio Hideki</a></p>
         ]]>
     </string>
+    <string name="logo_app_content_description">Logo do aplicativo</string>
+    <string name="copy_bets_content_description">Botão para copiar apostas geradas</string>
+    <string name="refused_content_description">Botão para verificar jogos gerados, mas recusados</string>
+    <string name="card_share_content_description">Botão para compartilhar o último resultado da Mega-sena</string>
+    <string name="retry_content_description">Botão para tentar carregar os dados do último sorteio novamente</string>
+    <string name="update_location_content_description">Botão para atualizar sua localização</string>
+    <string name="history_share_content_description">Botão para compartilhar um sorteio anterior</string>
+    <string name="history_copy_content_description">Botão para copiar um sorteio anterior</string>
+    <string name="location_logo_content_description">Logo que representa um local</string>
+    <string name="maps_link_content_description">Botão para abrir lotérica no Maps</string>
+
+
 
 </resources>

@@ -109,7 +109,7 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
 
     private void setupSeekBar() {
 
-        mTvDistance.setText(getString(R.string.distance) + ": " + (mDistanceMetersFinal) + " m");
+        mTvDistance.setText(getString(R.string.distance) + ": " + (mDistanceMetersFinal) + " " + context.getString(R.string.meters_label));
         mSeekBarDistance.setProgress(5);
         mSeekBarDistance.setMax(95);
         mSeekBarDistance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

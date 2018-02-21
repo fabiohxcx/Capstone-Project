@@ -294,7 +294,8 @@
                     android:tint="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_valor_prox_concurso" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_valor_prox_concurso"
+                    android:contentDescription="@string/card_share_content_description"/>
 
 
                 <com.victor.loading.rotate.RotateLoading
@@ -325,7 +326,8 @@
                     android:src="@drawable/autorenew"
                     android:tint="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/bt_card_share" />
+                    app:layout_constraintEnd_toStartOf="@+id/bt_card_share"
+                    android:contentDescription="@string/retry_content_description"/>
 
             </android.support.constraint.ConstraintLayout>
 

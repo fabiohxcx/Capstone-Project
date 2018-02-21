@@ -69,9 +69,9 @@ public class LotteryNearbyAdapter extends RecyclerView.Adapter<LotteryNearbyAdap
             Log.d("LotteryNearbyAdapter", "onBindViewHolder: distance:" + distance);
 
             if (distance > 1000) {
-                holder.mLotteryDistance.setText(new DecimalFormat("##.##").format((distance / 1000)) + " km");
+                holder.mLotteryDistance.setText(new DecimalFormat("##.##").format((distance / 1000)) + " " + context.getString(R.string.km_label));
             } else {
-                holder.mLotteryDistance.setText(new DecimalFormat("##.##").format(distance) + " m");
+                holder.mLotteryDistance.setText(new DecimalFormat("##.##").format(distance) + " " + context.getString(R.string.meters_label));
             }
 
             setAnimation(holder.itemView, position);

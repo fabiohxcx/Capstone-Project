@@ -39,11 +39,13 @@
                 android:layout_marginTop="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:focusable="true"
                 android:padding="@dimen/margin_less"
                 android:src="@drawable/crosshairs_gps"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_your_location"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_your_location" />
+                app:layout_constraintTop_toTopOf="@+id/tv_your_location"
+                android:contentDescription="@string/update_location_content_description"/>
 
             <SeekBar
                 android:id="@+id/sb_distance"

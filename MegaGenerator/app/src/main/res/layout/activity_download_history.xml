@@ -75,6 +75,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mega2" />
+        app:srcCompat="@drawable/mega2"
+        android:contentDescription="@string/logo_app_content_description"/>
 
 </android.support.constraint.ConstraintLayout>

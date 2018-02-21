@@ -55,7 +55,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:backgroundTint="@color/colorAccent"
-                    android:text="Gerar"
+                    android:text="@string/generate"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Qtd. Apostas"
+                    android:text="@string/number_bets"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,7 +99,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:checked="true"
-                    android:text="Recusar jogos que já foram sorteados"
+                    android:text="@string/refuse_bet_already_drawn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_number_per_bet_label" />
 
@@ -111,7 +111,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:checked="true"
-                    android:text="Recusar jogos com números em sequência"
+                    android:text="@string/refuse_number_sequence"
                     app:layout_constraintBottom_toTopOf="@+id/bt_generate"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cb_refuse_history" />
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Jogos Gerados"
+                    android:text="@string/generated_bets"
                     android:textColor="@color/white"
                     android:textSize="@dimen/material_text_title"
                     android:textStyle="bold"
@@ -175,10 +175,12 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginRight="@dimen/margin_less"
+                        android:layout_marginEnd="@dimen/margin_less"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/content_copy"
                         android:tint="@color/white"
-                        android:visibility="visible" />
+                        android:visibility="visible"
+                        android:contentDescription="@string/copy_bets_content_description"/>
 
                     <ImageButton
                         android:id="@+id/bt_refused_bets_generated"
@@ -186,7 +188,8 @@
                         android:layout_height="30dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/alert_circle"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:contentDescription="@string/refused_content_description"/>
 
                 </LinearLayout>
 
