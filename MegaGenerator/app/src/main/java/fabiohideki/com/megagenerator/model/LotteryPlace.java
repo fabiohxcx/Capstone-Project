@@ -6,10 +6,10 @@ package fabiohideki.com.megagenerator.model;
 
 public class LotteryPlace {
 
-    Geometry geometry;
-    String name;
-    String openNow;
-    String vicinity;
+    private Geometry geometry;
+    private String name;
+    private String openNow;
+    private String vicinity;
 
     public Geometry getGeometry() {
         return geometry;

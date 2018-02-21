@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -158,6 +159,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
 
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_home));
         context = getContext();
 
         MobileAds.initialize(context, getString(R.string.AdMobAppID));

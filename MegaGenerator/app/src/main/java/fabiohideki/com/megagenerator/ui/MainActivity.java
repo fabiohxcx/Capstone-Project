@@ -99,17 +99,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        getSupportActionBar().setTitle(getString(R.string.app_name));
+
         if (id == R.id.nav_home) {
             mViewPager.setCurrentItem(0);
+            getSupportActionBar().setTitle(getString(R.string.title_home));
 
         } else if (id == R.id.nav_generator) {
             mViewPager.setCurrentItem(1);
+            getSupportActionBar().setTitle(getString(R.string.number_generator));
 
         } else if (id == R.id.nav_results) {
             mViewPager.setCurrentItem(2);
+            getSupportActionBar().setTitle(getString(R.string.result));
 
         } else if (id == R.id.nav_near_lottery) {
             mViewPager.setCurrentItem(3);
+            getSupportActionBar().setTitle(getString(R.string.near_lottery));
 
         } else if (id == R.id.nav_share) {
 

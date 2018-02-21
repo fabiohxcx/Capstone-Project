@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,10 +94,12 @@ public class MainFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mViewPager.setCurrentItem(0);
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_home));
                     break;
 
                 case R.id.navigation_notifications:
                     mViewPager.setCurrentItem(1);
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_news));
                     break;
             }
 

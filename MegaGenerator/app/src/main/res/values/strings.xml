@@ -5,7 +5,7 @@
 
     <!-- BottomNavigationView title -->
     <string name="title_home">Home</string>
-    <string name="title_news">Novidades</string>
+    <string name="title_news">Notícias</string>
 
     <!-- Carview Home -->
     <string name="card_title_sena">Sena - 6 números acertados</string>
