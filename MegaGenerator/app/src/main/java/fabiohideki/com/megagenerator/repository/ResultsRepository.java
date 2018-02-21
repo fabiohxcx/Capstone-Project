@@ -22,29 +22,32 @@ public class ResultsRepository {
 
         Cursor cursor;
 
-        cursor = context.getContentResolver().query(ResultsContract.ResultEntry.CONTENT_URI,
-                null,
-                null,
-                null,
-                ResultsContract.ResultEntry.COLUMN_CONCURSO + " DESC");
+        if (context != null) {
 
-        if (cursor != null && cursor.getCount() > 0) {
+            cursor = context.getContentResolver().query(ResultsContract.ResultEntry.CONTENT_URI,
+                    null,
+                    null,
+                    null,
+                    ResultsContract.ResultEntry.COLUMN_CONCURSO + " DESC");
 
-            while (cursor.moveToNext()) {
-                Resultado resultado = new Resultado();
+            if (cursor != null && cursor.getCount() > 0) {
 
-                resultado.setNumero(cursor.getInt(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_CONCURSO)));
-                resultado.setData(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_DATE)));
-                resultado.setDezenas(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_NUMBERS)));
+                while (cursor.moveToNext()) {
+                    Resultado resultado = new Resultado();
 
-                results.add(resultado);
+                    resultado.setNumero(cursor.getInt(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_CONCURSO)));
+                    resultado.setData(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_DATE)));
+                    resultado.setDezenas(cursor.getString(cursor.getColumnIndex(ResultsContract.ResultEntry.COLUMN_NUMBERS)));
 
-            }
+                    results.add(resultado);
 
-            cursor.close();
+                }
 
-            if (results != null && results.size() > 0) {
-                return results;
+                cursor.close();
+
+                if (results != null && results.size() > 0) {
+                    return results;
+                }
             }
         }
 

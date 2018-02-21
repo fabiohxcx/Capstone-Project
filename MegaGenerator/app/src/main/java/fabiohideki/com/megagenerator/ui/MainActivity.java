@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_results) {
             mViewPager.setCurrentItem(2);
-            getSupportActionBar().setTitle(getString(R.string.result));
+            getSupportActionBar().setTitle(getString(R.string.results));
 
         } else if (id == R.id.nav_near_lottery) {
             mViewPager.setCurrentItem(3);

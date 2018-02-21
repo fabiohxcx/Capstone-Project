@@ -14,22 +14,25 @@ public class BetGenerator {
 
     public static TreeSet<Integer> generate(int numberOfBalls, List<Integer> numberToRefuse) {
 
-        TreeSet<Integer> balls = new TreeSet<Integer>();
-        Random random = new Random();
+        if (numberOfBalls > 0) {
+            TreeSet<Integer> balls = new TreeSet<Integer>();
+            Random random = new Random();
 
-        while (balls.size() < numberOfBalls) {
-            int ball = NumberGenerator.generate(random);
-            Log.d("Fabio", "generate: " + ball);
-            if (numberToRefuse != null) {
-                if (!numberToRefuse.contains(ball)) {
+            while (balls.size() < numberOfBalls) {
+                int ball = NumberGenerator.generate(random);
+                Log.d("Fabio", "generate: " + ball);
+                if (numberToRefuse != null) {
+                    if (!numberToRefuse.contains(ball)) {
+                        balls.add(ball);
+                    }
+                } else {
                     balls.add(ball);
                 }
-            } else {
-                balls.add(ball);
             }
+            return balls;
         }
 
-        return balls;
+        return null;
     }
 
 }

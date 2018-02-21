@@ -101,9 +101,7 @@ public class GeneratorFragment extends Fragment {
     public void generate(View view) {
 
         GeneratorTask generatorTask = new GeneratorTask();
-
         generatorTask.execute();
-
 
     }
 
@@ -124,7 +122,6 @@ public class GeneratorFragment extends Fragment {
             mNumberPerBets = Integer.parseInt((String) mSpinnerNumbersPerBet.getSelectedItem());
             mCheckHistory = mCheckBoxRefuseHistory.isChecked();
 
-
             StringBuilder stringBuilder = new StringBuilder();
 
             candidatesPassed = new ArrayList<>();
@@ -142,29 +139,33 @@ public class GeneratorFragment extends Fragment {
                 ResultsRepository resultsRepository = new ResultsRepository();
                 List<Resultado> resultados = resultsRepository.listAll(getContext());
 
-                //Check Balls with Algorithms
-                if (mCheckHistory) {
-                    CheckInHistory checkInHistory = new CheckInHistory(resultados);
-                    checkInHistory.execute(candidate);
-                }
+                if (resultados != null && !resultados.isEmpty()) {
+                    //Check Balls with Algorithms
+                    if (mCheckHistory) {
+                        CheckInHistory checkInHistory = new CheckInHistory(resultados);
+                        checkInHistory.execute(candidate);
+                    }
 
-                if (mCheckBoxRefuseSequence.isChecked()) {
-                    CheckSequenceHorizontal checkSequenceHorizontal = new CheckSequenceHorizontal();
-                    checkSequenceHorizontal.execute(candidate);
-                }
+                    if (mCheckBoxRefuseSequence.isChecked()) {
+                        CheckSequenceHorizontal checkSequenceHorizontal = new CheckSequenceHorizontal();
+                        checkSequenceHorizontal.execute(candidate);
+                    }
 
-                if (!candidate.isRefused()) {
-                    candidatesPassed.add(candidate);
-                    counter++;
+                    if (!candidate.isRefused()) {
+                        candidatesPassed.add(candidate);
+                        counter++;
 
-                    stringBuilder.append("#" + counter + " - " + candidate.getBalls().toString() + "\n");
+                        stringBuilder.append("#" + counter + " - " + candidate.getBalls().toString() + "\n");
 
-                    Log.d("Fabio", "passed: " + candidate.getBalls().toString());
+                        Log.d("Fabio", "passed: " + candidate.getBalls().toString());
+                    } else {
+                        candidatesRefused.add(candidate);
+                        Log.d("Fabio", "refused: " + candidate.getBalls().toString());
+                    }
+
                 } else {
-                    candidatesRefused.add(candidate);
-                    Log.d("Fabio", "refused: " + candidate.getBalls().toString());
+                    break;
                 }
-
             }
 
             return stringBuilder.toString();
@@ -175,6 +176,10 @@ public class GeneratorFragment extends Fragment {
             super.onPostExecute(result);
 
             mBetsGenerated = result;
+
+            if (result.isEmpty()) {
+                return;
+            }
 
             if (candidatesRefused.size() > 0) {
                 mIVRefusedBetsGenerated.setVisibility(View.VISIBLE);
@@ -187,6 +192,10 @@ public class GeneratorFragment extends Fragment {
 
                 for (int i = 0; i < candidatesPassed.size(); i++) {
                     BetCandidate betCandidate = candidatesPassed.get(i);
+
+                    if (getActivity() == null) {
+                        return;
+                    }
 
                     View itemGenerated = getActivity().getLayoutInflater().inflate(R.layout.item_bet_generated, (ViewGroup) rootView, false);
 
