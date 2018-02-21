@@ -112,7 +112,7 @@
 <h1><font color=#388E3C>Acumulação</font></h1>
 <p>Não havendo acertador em qualquer faixa, o valor acumula para o concurso seguinte, na respectiva faixa de premiação. Não deixe de conferir o seu bilhete de aposta.</p>
 
-<p>Os prêmios prescrevem 90 dias após a data do sorteio. Após esse prazo, os valores são repassados ao tesouro nacional para aplicação no FIES - Fundo de Financiamento ao Estudante do Ensino Superior.</p>]]>    </string>
+<p>Os prêmios prescrevem 90 dias após a data do sorteio. Após esse prazo, os valores são repassados ao tesouro nacional para aplicação no FIES - Fundo de Financiamento ao Estudante do Ensino Superior.</p>]]></string>
 
     <!-- PricesFragment -->
     <string name="probability_of_correctness">Probabilidade de acerto (1 em)</string>
@@ -121,5 +121,16 @@
     <string name="senna">Sena</string>
     <string name="quina">Quina</string>
     <string name="quatrain">Quadra</string>
+
+    <!-- about Dialog -->
+    <string name="version_app">Versão:</string>
+    <string name="about_content">
+        <![CDATA[
+<p>App desenvolvido para a consulta e  geração de apostas para a Mega-sena da Loteria da Caixa.</p>
+<p>Esse aplicativo não possui nenhum vínculo com a Caixa Econômica Federal.
+Todas as informações são retiradas do site: <a href=\"http://loterias.caixa.gov.br/\">loterias.caixa.gov.br</a></p>
+<p>Desenvolvido por: <a href=\"mailto:hideki.fabio@gmail.com\">Fábio Hideki</a></p>
+        ]]>
+    </string>
 
 </resources>

@@ -37,7 +37,6 @@ public class MainFragment extends Fragment {
     CustomViewPager mViewPager;
 
     private HomeFragment mHomeFragment;
-
     private NewsFragment mNewsFragment;
 
     public MainFragment() {
@@ -56,6 +55,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -63,6 +63,30 @@ public class MainFragment extends Fragment {
         mViewPager.setPagingEnabled(false);
 
         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mViewPager != null && getActivity() != null) {
+            if (mViewPager.getCurrentItem() == 0) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+            } else if (mViewPager.getCurrentItem() == 1) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_news);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mViewPager != null && getActivity() != null) {
+            if (mViewPager.getCurrentItem() == 0) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+            } else if (mViewPager.getCurrentItem() == 1) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_news);
+            }
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -83,6 +107,7 @@ public class MainFragment extends Fragment {
         adapter.addFragment(mNewsFragment, mTitleNews);
 
         viewPager.setAdapter(adapter);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
