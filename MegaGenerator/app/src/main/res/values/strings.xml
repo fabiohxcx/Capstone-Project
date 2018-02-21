@@ -84,5 +84,7 @@
     <string name="updating_location">Atualizando sua localização</string>
     <string name="km_label">km</string>
     <string name="meters_label">m</string>
+    <string name="location_permission_denied">Permissão negada</string>
+
 
 </resources>
