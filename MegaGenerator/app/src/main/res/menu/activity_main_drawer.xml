@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/top_menu"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home_outline"
@@ -22,17 +24,21 @@
             android:title="@string/near_lottery" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/bottom_menu"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_how_to_play"
+            android:icon="@drawable/tooltip_text"
+            android:title="@string/how_to_play" />
+        <item
+            android:id="@+id/nav_price_prob"
+            android:icon="@drawable/chart_bar"
+            android:title="@string/prices_probability" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/information_variant"
+            android:title="@string/about" />
+    </group>
 
 </menu>

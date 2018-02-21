@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="fabiohideki.com.megagenerator.ui.NearByLotteryFragment">
+        tools:context="fabiohideki.com.megagenerator.ui.NearbyLotteryFragment">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:padding="@dimen/margin_less"
-                android:text="Location"
+                android:text="@string/loading_location"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toStartOf="@+id/iv_update_location"
                 app:layout_constraintHorizontal_bias="0.5"

@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity
 
     private MainFragment mMainFragment;
     private HistoryResultFragment mHistoryResultFragment;
-    private NearByLotteryFragment mNearByLotteryFragment;
+    private NearbyLotteryFragment mNearByLotteryFragment;
+    private GeneratorFragment mGeneratorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +118,15 @@ public class MainActivity extends AppCompatActivity
             mViewPager.setCurrentItem(3);
             getSupportActionBar().setTitle(getString(R.string.near_lottery));
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_how_to_play) {
+            mViewPager.setCurrentItem(4);
+            getSupportActionBar().setTitle(getString(R.string.how_to_play));
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_price_prob) {
+            mViewPager.setCurrentItem(5);
+            getSupportActionBar().setTitle(getString(R.string.prices_probability));
+
+        } else if (id == R.id.nav_about) {
 
         }
 
@@ -135,8 +142,11 @@ public class MainActivity extends AppCompatActivity
         }
         adapter.addFragment(mMainFragment);
 
-        GeneratorFragment generatorFragment = new GeneratorFragment();
-        adapter.addFragment(generatorFragment);
+        if (mGeneratorFragment == null) {
+            mGeneratorFragment = new GeneratorFragment();
+            mGeneratorFragment.setRetainInstance(true);
+        }
+        adapter.addFragment(mGeneratorFragment);
 
         if (mHistoryResultFragment == null) {
             mHistoryResultFragment = new HistoryResultFragment();
@@ -145,10 +155,16 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(mHistoryResultFragment);
 
         if (mNearByLotteryFragment == null) {
-            mNearByLotteryFragment = new NearByLotteryFragment();
+            mNearByLotteryFragment = new NearbyLotteryFragment();
             mNearByLotteryFragment.setRetainInstance(true);
         }
         adapter.addFragment(mNearByLotteryFragment);
+
+        HowToPlayFragment howToPlayFragment = new HowToPlayFragment();
+        adapter.addFragment(howToPlayFragment);
+
+        PricesFragment pricesFragment = new PricesFragment();
+        adapter.addFragment(pricesFragment);
 
         mViewPager.setAdapter(adapter);
     }

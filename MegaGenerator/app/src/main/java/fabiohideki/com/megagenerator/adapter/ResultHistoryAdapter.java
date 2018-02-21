@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.l4digital.fastscroll.FastScroller;
 
@@ -150,8 +149,6 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
                 intentShare.putExtra(Intent.EXTRA_SUBJECT, appName);
                 intentShare.putExtra(Intent.EXTRA_TEXT, result + " " + megaSena + ": " + resultado.getNumero() + " - " + date + ": " + resultado.getData() + " - " + numbers + ": " + resultado.getDezenas());
                 context.startActivity(intentShare);
-
-                Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show();
 
             } else if (id == R.id.bt_item_history_copy) {
 

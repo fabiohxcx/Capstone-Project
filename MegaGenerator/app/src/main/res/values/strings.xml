@@ -29,6 +29,11 @@
     <string name="results">Resultados anteriores</string>
     <string name="number_generator">Gerador de palpites</string>
     <string name="near_lottery">Lotéricas próximas</string>
+    <string name="how_to_play">Como jogar</string>
+    <string name="prices_probability">Preços e Probabilidades</string>
+    <string name="about">Sobre</string>
+
+    <!-- cardview -->
     <string name="no_winners">Não houve acertador</string>
     <string name="winners_bets">apostas ganhadoras, R$</string>
     <string name="today">hoje</string>
@@ -76,12 +81,51 @@
     <string name="bet_generated_refused">Apostas geradas recusadas</string>
     <string name="ok">OK</string>
 
-    <!-- NearByLotteryFragment -->
+    <!-- NearbyLotteryFragmentment -->
     <string name="distance">Distância</string>
     <string name="updating_location">Atualizando sua localização</string>
     <string name="km_label">km</string>
     <string name="meters_label">m</string>
     <string name="location_permission_denied">Permissão negada</string>
+    <string name="loading_location">Carregando sua localização</string>
+
+    <string name="how_to_play_content" formatted="false">
+        <![CDATA[<p>A Mega-Sena paga milhões para o acertador dos 6 números sorteados. Ainda é possível ganhar prêmios ao acertar 4 ou 5 números dentre os 60 disponíveis no volante de apostas. Para realizar o sonho de ser o próximo milionário, você deve marcar de 6 a 15 números do volante, podendo deixar que o sistema escolha os números para você (Surpresinha) e/ou concorrer com a mesma aposta por 2, 4 ou 8 concursos consecutivos (Teimosinha).</p>
+
+<h1><font color=#388E3C>Sorteios</font></h1>
+<p>Os sorteios da Mega-Sena são realizados duas vezes por semana, às quartas e aos sábados.</p>
+
+<h1><font color=#388E3C>Apostas</font></h1>
+<p>A aposta mínima, de 6 números, custa R$ 3,50. Quanto mais números marcar, maior o preço da aposta e maiores as chances de faturar o prêmio mais cobiçado do país.</p>
+
+<h1><font color=#388E3C>Premiação</font></h1>
+<p>O prêmio bruto corresponde a 45,3% da arrecadação, já computado o adicional destinado ao Ministério do Esporte. Dessa porcentagem:</p>
+<ul>
+    <li>35% são distribuídos entre os acertadores dos 6 números sorteados (Sena);</li>
+    <li>19% entre os acertadores de 5 números (Quina);</li>
+    <li>19% entre os acertadores de 4 números (Quadra);</li>
+    <li>22% ficam acumulados e são distribuídos aos acertadores dos 6 números nos concursos de final 0 ou 5.</li>
+    <li>5% ficam acumulados para a primeira faixa - sena - do último concurso do ano de final 0 ou 5 (Mega da Virada).</li>
+</ul>
+<h3><font color=#4caf50>Recebimento de prêmios</font></h2>
+
+<p>Você pode receber seu prêmio em qualquer casa lotérica credenciada ou nas agências da Caixa. Caso o prêmio líquido seja superior a R$ 1.332,78 (bruto de R$ 1.903,98) o pagamento pode ser realizado somente nas agências da Caixa. Valores iguais ou acima de R$ 10.000,00 são pagos após 2 dias de sua apresentação na agência da Caixa.</p>
+
+<h1><font color=#388E3C>Acumulação</font></h1>
+<p>Não havendo acertador em qualquer faixa, o valor acumula para o concurso seguinte, na respectiva faixa de premiação. Não deixe de conferir o seu bilhete de aposta.</p>
+
+<p>Os prêmios prescrevem 90 dias após a data do sorteio. Após esse prazo, os valores são repassados ao tesouro nacional para aplicação no FIES - Fundo de Financiamento ao Estudante do Ensino Superior.</p>
+]]>
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="probability_of_correctness">Probabilidade de acerto (1 em)</string>
+    <string name="number_of_bet_played">Quantidade de nº jogados</string>
+    <string name="bet_value">Valor de aposta</string>
+    <string name="senna">Sena</string>
+    <string name="quina">Quina</string>
+    <string name="quatrain">Quadra</string>
 
 
 </resources>
