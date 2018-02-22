@@ -1,5 +1,6 @@
 package fabiohideki.com.megagenerator.custom;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -18,6 +19,7 @@ public class CustomViewPager extends ViewPager {
         this.enabled = true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (this.enabled) {

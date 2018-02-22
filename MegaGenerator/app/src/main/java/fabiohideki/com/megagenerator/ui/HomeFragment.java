@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -159,20 +158,23 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, rootView);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_home));
-        context = getContext();
+        if (getActivity() != null) {
 
-        MobileAds.initialize(context, getString(R.string.AdMobAppID));
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_home));
+            context = getContext();
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+            MobileAds.initialize(context, getString(R.string.AdMobAppID));
 
-        Log.d(TAG, "HomeFragment: onCreateView");
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
 
-        restartLoader();
-        Log.d(TAG, "HomeFragment: onCreateView restartLoader()");
+            Log.d(TAG, "HomeFragment: onCreateView");
 
-        mBtRetry.setVisibility(View.INVISIBLE);
+            restartLoader();
+            Log.d(TAG, "HomeFragment: onCreateView restartLoader()");
+
+            mBtRetry.setVisibility(View.INVISIBLE);
+        }
 
         return rootView;
     }
@@ -181,7 +183,8 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
         String[] bolas = ultimoResultado.getResultado().split("-");
 
-        mCardConcurso.setText(mTitleConcurso + " " + Integer.toString(ultimoResultado.getNroConcurso()) + " (" + Utils.convertMillitoDate(ultimoResultado.getDataConcurso()) + ")");
+
+        mCardConcurso.setText(getString(R.string.card_title, mTitleConcurso, ultimoResultado.getNroConcurso(), Utils.convertMillitoDate(ultimoResultado.getDataConcurso())));
         mCardConcursoAcumulou.setVisibility(ultimoResultado.isAcumulou() == 1 ? View.VISIBLE : View.INVISIBLE);
         mBola1.setText(bolas[0]);
         mBola2.setText(bolas[1]);
@@ -230,7 +233,7 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
         if (Build.VERSION.SDK_INT >= 23) {
             String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            if (!hasPermissions(context, PERMISSIONS)) {
+            if (!Utils.hasPermissions(context, PERMISSIONS)) {
                 requestPermissions(PERMISSIONS, REQUEST);
             } else {
                 shareLastResult();
@@ -240,16 +243,6 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private static boolean hasPermissions(Context context, String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -355,8 +348,8 @@ public class HomeFragment extends Fragment implements LoaderManager.LoaderCallba
 
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        TextView tvText = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
-        TextView tvAction = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
+        TextView tvText = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+        TextView tvAction = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
 
         Typeface font = Typer.set(context).getFont(Font.ROBOTO_MEDIUM);
         tvText.setTypeface(font);

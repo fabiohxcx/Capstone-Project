@@ -56,6 +56,7 @@ import butterknife.OnClick;
 import fabiohideki.com.megagenerator.R;
 import fabiohideki.com.megagenerator.adapter.LotteryNearbyAdapter;
 import fabiohideki.com.megagenerator.model.LotteryPlace;
+import fabiohideki.com.megagenerator.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,6 +107,23 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        context = getContext();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Utils.hasPermissions(context, PERMISSIONS)) {
+                requestPermissions(PERMISSIONS, REQUEST);
+            } else {
+                buildGoogleApiClient();
+            }
+        } else {
+            buildGoogleApiClient();
+        }
+
+    }
 
     private void setupSeekBar() {
 
@@ -159,35 +177,6 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        context = getContext();
-
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (!hasPermissions(context, PERMISSIONS)) {
-                requestPermissions(PERMISSIONS, REQUEST);
-            } else {
-                buildGoogleApiClient();
-            }
-        } else {
-            buildGoogleApiClient();
-        }
-
-    }
-
-    private static boolean hasPermissions(Context context, String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
@@ -211,8 +200,8 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
 
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        TextView tvText = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
-        TextView tvAction = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
+        TextView tvText = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+        TextView tvAction = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
 
         Typeface font = Typer.set(context).getFont(Font.ROBOTO_MEDIUM);
         tvText.setTypeface(font);
@@ -235,8 +224,8 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
 
         snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        TextView tvText = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
-        TextView tvAction = (TextView) (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
+        TextView tvText = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+        TextView tvAction = (snackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
 
         Typeface font = Typer.set(context).getFont(Font.ROBOTO_MEDIUM);
         tvText.setTypeface(font);
@@ -338,11 +327,11 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         //mTvTest.setText("Response is: " + response.toString());
-                        Log.d("Fabio", "Response: " + response.toString());
+                        Log.d("Fabio", "Response: " + response);
 
 
                         JsonParser jsonParser = new JsonParser();
-                        JsonObject jo = (JsonObject) jsonParser.parse(response.toString());
+                        JsonObject jo = (JsonObject) jsonParser.parse(response);
                         JsonArray jsonArr = jo.getAsJsonArray("results");
 
                         Gson gson = new Gson();

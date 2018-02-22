@@ -12,9 +12,7 @@ public class NumberGenerator {
 
         if (random == null) random = new Random();
 
-        int numberCandidate = random.nextInt(60) + 1;
-
-        return numberCandidate;
+        return random.nextInt(60) + 1;
     }
 
 }

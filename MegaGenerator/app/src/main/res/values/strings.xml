@@ -8,6 +8,7 @@
     <string name="title_news">Notícias</string>
 
     <!-- Carview Home -->
+    <string name="card_title">%1$s  %2$d (%3$s)</string>
     <string name="card_title_sena">Sena - 6 números acertados</string>
     <string name="card_title_quina">Quina - 5 números acertados</string>
     <string name="card_title_quadra">Quadra - 4 números acertados</string>
@@ -43,7 +44,7 @@
     <!-- DownloadHistoryActivity -->
     <string name="loading_history">Baixando histórico de sorteios</string>
     <string name="welcome">Bem vindo!</string>
-    <string name="downloading">Baixando ...</string>
+    <string name="downloading">Baixando &#8230;</string>
     <string name="downloaded">Arquivo baixado</string>
     <string name="unzip">Arquivo descompactado</string>
 
@@ -147,7 +148,6 @@ Todas as informações são retiradas do site: <a href=\"http://loterias.caixa.g
     <string name="history_copy_content_description">Botão para copiar um sorteio anterior</string>
     <string name="location_logo_content_description">Logo que representa um local</string>
     <string name="maps_link_content_description">Botão para abrir lotérica no Maps</string>
-
 
 
 </resources>

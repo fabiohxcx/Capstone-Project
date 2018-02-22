@@ -45,7 +45,7 @@ public class ResultsRepository {
 
                 cursor.close();
 
-                if (results != null && results.size() > 0) {
+                if (results.size() > 0) {
                     return results;
                 }
             }
@@ -87,7 +87,8 @@ public class ResultsRepository {
 
         }
 
-        cursor.close();
+        if (cursor != null)
+            cursor.close();
         return null;
     }
 

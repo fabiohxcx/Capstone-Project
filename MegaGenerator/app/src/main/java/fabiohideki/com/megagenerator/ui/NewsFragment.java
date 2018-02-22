@@ -48,7 +48,6 @@ public class NewsFragment extends Fragment {
 
     private NewsAdapter mNewsAdapter;
 
-    private View mRootView;
     private List<NewsItem> mListNews;
 
     public NewsFragment() {
@@ -60,8 +59,8 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mRootView = inflater.inflate(R.layout.fragment_news, container, false);
-        ButterKnife.bind(this, mRootView);
+        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
+        ButterKnife.bind(this, rootView);
 
         constraintLayoutError.setVisibility(View.GONE);
 
@@ -69,7 +68,7 @@ public class NewsFragment extends Fragment {
 
         getNews();
 
-        return mRootView;
+        return rootView;
     }
 
     private void getNews() {
@@ -86,7 +85,7 @@ public class NewsFragment extends Fragment {
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         //mTvTest.setText("Response is: " + response.toString());
-                        Log.d("Fabio", "Response: " + response.toString());
+                        Log.d("Fabio", "Response: " + response);
 
                         //mTvTest.setText(response);
 
@@ -102,15 +101,12 @@ public class NewsFragment extends Fragment {
                         } catch (IOException e) {
                             e.printStackTrace();
                         } finally {
-                            if (stream != null) {
-                                try {
-                                    stream.close();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                            try {
+                                stream.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
-
 
                         mNewsAdapter = new NewsAdapter(mListNews);
                         mRecyclerViewNews.setAdapter(mNewsAdapter);

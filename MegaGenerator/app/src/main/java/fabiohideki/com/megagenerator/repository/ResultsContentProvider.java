@@ -8,6 +8,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import static fabiohideki.com.megagenerator.repository.ResultsContract.ResultEntry.COLUMN_CONCURSO;
@@ -19,6 +20,8 @@ public class ResultsContentProvider extends ContentProvider {
     public static final int RESULTS = 100;
     public static final int RESULTS_WITH_ID = 101;
     public static final int RESULTS_LAST = 102;
+
+    private Context context;
 
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -44,14 +47,14 @@ public class ResultsContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
 
-        Context context = getContext();
+        context = getContext();
         mResultsDbHelper = new ResultsDbHelper(context);
 
         return true;
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
 
         final SQLiteDatabase db = mResultsDbHelper.getWritableDatabase();
 
@@ -75,14 +78,15 @@ public class ResultsContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (context != null)
+            context.getContentResolver().notifyChange(uri, null);
 
         return returnUri;
 
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         final SQLiteDatabase db = mResultsDbHelper.getReadableDatabase();
 
@@ -132,13 +136,14 @@ public class ResultsContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri:" + uri);
         }
 
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        if (context != null)
+            retCursor.setNotificationUri(context.getContentResolver(), uri);
 
         return retCursor;
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
 
         final SQLiteDatabase db = mResultsDbHelper.getWritableDatabase();
 
@@ -158,22 +163,22 @@ public class ResultsContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        if (resultDeleted != 0) {
-            getContext().getContentResolver().notifyChange(uri, null);
+        if (resultDeleted != 0 && context != null) {
+            context.getContentResolver().notifyChange(uri, null);
         }
 
         return resultDeleted;
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         // at the given URI.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         throw new UnsupportedOperationException("Not yet implemented");
     }

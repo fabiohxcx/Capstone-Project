@@ -1,6 +1,7 @@
 package fabiohideki.com.megagenerator.ui;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -55,7 +56,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, rootView);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+        setFragmentTitleInActionBar(getActivity(), getString(R.string.title_home));
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -65,14 +66,19 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    private void setFragmentTitleInActionBar(Activity activity, String title) {
+        if (activity != null)
+            ((AppCompatActivity) activity).getSupportActionBar().setTitle(title);
+    }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && mViewPager != null && getActivity() != null) {
             if (mViewPager.getCurrentItem() == 0) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+                setFragmentTitleInActionBar(getActivity(), getString(R.string.title_home));
             } else if (mViewPager.getCurrentItem() == 1) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_news);
+                setFragmentTitleInActionBar(getActivity(), getString(R.string.title_news));
             }
         }
     }
@@ -82,9 +88,9 @@ public class MainFragment extends Fragment {
         super.onResume();
         if (mViewPager != null && getActivity() != null) {
             if (mViewPager.getCurrentItem() == 0) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+                setFragmentTitleInActionBar(getActivity(), getString(R.string.title_home));
             } else if (mViewPager.getCurrentItem() == 1) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_news);
+                setFragmentTitleInActionBar(getActivity(), getString(R.string.title_news));
             }
         }
     }
@@ -119,12 +125,12 @@ public class MainFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mViewPager.setCurrentItem(0);
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_home));
+                    setFragmentTitleInActionBar(getActivity(), getString(R.string.title_home));
                     break;
 
                 case R.id.navigation_notifications:
                     mViewPager.setCurrentItem(1);
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_news));
+                    setFragmentTitleInActionBar(getActivity(), getString(R.string.title_news));
                     break;
             }
 

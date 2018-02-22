@@ -20,7 +20,6 @@ import fabiohideki.com.megagenerator.model.NewsItem;
 public class FeedXmlParser {
 
     private static final String ns = null;
-    private List<NewsItem> newsItems;
 
     public List parse(InputStream in) throws XmlPullParserException, IOException {
         Log.d("fabio", "FeedXmlParser: ");
@@ -39,7 +38,7 @@ public class FeedXmlParser {
     }
 
     private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
-        newsItems = new ArrayList();
+        List<NewsItem> newsItems = new ArrayList();
 
         parser.require(XmlPullParser.START_TAG, ns, "rss");
 

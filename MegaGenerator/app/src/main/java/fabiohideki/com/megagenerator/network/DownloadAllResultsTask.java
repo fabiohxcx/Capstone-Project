@@ -41,8 +41,6 @@ public class DownloadAllResultsTask extends AsyncTask<String, String, String> {
     private static final String ZIP_FILE_NAME = "downloaded_results.zip";
 
     private Context context;
-    private URL mURLZipfile;
-    private File mDownloadedZip;
 
     private TextView percentage;
 
@@ -64,19 +62,19 @@ public class DownloadAllResultsTask extends AsyncTask<String, String, String> {
 
         try {
 
-            mURLZipfile = new URL(URL_ZIP_FILE);
+            URL urlZipfile = new URL(URL_ZIP_FILE);
 
             String internalPath = context.getFilesDir().getPath().toString() + File.separator + Environment.DIRECTORY_DOWNLOADS + File.separator + ZIP_FILE_NAME;
             String destinationPath = context.getFilesDir().getPath().toString() + File.separator + Environment.DIRECTORY_DOWNLOADS;
 
             Log.d("Fabio", internalPath);
 
-            mDownloadedZip = new File(internalPath);
+            File downloadedZip = new File(internalPath);
 
-            FileUtils.copyURLToFile(mURLZipfile, mDownloadedZip);
+            FileUtils.copyURLToFile(urlZipfile, downloadedZip);
             publishProgress(context.getResources().getString(R.string.downloaded));
 
-            boolean result = Utils.unzipFile(context, destinationPath, mDownloadedZip);
+            boolean result = Utils.unzipFile(context, destinationPath, downloadedZip);
 
             if (result) {
                 publishProgress(context.getResources().getString(R.string.unzip));

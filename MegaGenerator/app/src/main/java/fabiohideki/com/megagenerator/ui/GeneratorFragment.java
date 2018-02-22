@@ -63,9 +63,6 @@ public class GeneratorFragment extends Fragment {
     @BindView(R.id.bt_refused_bets_generated)
     ImageView mIVRefusedBetsGenerated;
 
-    private int mBets;
-    private int mNumberPerBets;
-    private boolean mCheckHistory;
     private View rootView;
 
     private List<BetCandidate> candidatesPassed = new ArrayList<>();
@@ -118,9 +115,9 @@ public class GeneratorFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-            mBets = Integer.parseInt((String) mSpinnerBets.getSelectedItem());
-            mNumberPerBets = Integer.parseInt((String) mSpinnerNumbersPerBet.getSelectedItem());
-            mCheckHistory = mCheckBoxRefuseHistory.isChecked();
+            int numberBets = Integer.parseInt((String) mSpinnerBets.getSelectedItem());
+            int ballsPerBets = Integer.parseInt((String) mSpinnerNumbersPerBet.getSelectedItem());
+            boolean mCheckHistory = mCheckBoxRefuseHistory.isChecked();
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -128,10 +125,10 @@ public class GeneratorFragment extends Fragment {
             candidatesRefused = new ArrayList<>();
 
             int counter = 0;
-            while (counter < mBets) {
+            while (counter < numberBets) {
 
                 //create Bet Candidate with Random Balls
-                TreeSet<Integer> balls = BetGenerator.generate(mNumberPerBets, null);
+                TreeSet<Integer> balls = BetGenerator.generate(ballsPerBets, null);
                 BetCandidate candidate = new BetCandidate();
                 candidate.setBalls(balls);
 
@@ -187,7 +184,7 @@ public class GeneratorFragment extends Fragment {
 
             if (candidatesPassed.size() > 0) {
 
-                LinearLayout generatedBetsList = (LinearLayout) rootView.findViewById(R.id.ll_bet_items_generated);
+                LinearLayout generatedBetsList = rootView.findViewById(R.id.ll_bet_items_generated);
                 generatedBetsList.removeAllViews();
 
                 for (int i = 0; i < candidatesPassed.size(); i++) {
@@ -210,7 +207,7 @@ public class GeneratorFragment extends Fragment {
                         int number = iterador.next();
 
                         View ball = getActivity().getLayoutInflater().inflate(R.layout.ball, (ViewGroup) itemGenerated, false);
-                        ((TextView) ball).setText("" + number);
+                        ((TextView) ball).setText(String.valueOf(number));
                         linearLayoutItemGenerated.addView(ball);
                     }
 
@@ -256,7 +253,8 @@ public class GeneratorFragment extends Fragment {
         if (mBetsGenerated != null) {
             ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("", mBetsGenerated);
-            clipboard.setPrimaryClip(clip);
+            if (clipboard != null)
+                clipboard.setPrimaryClip(clip);
         }
     }
 

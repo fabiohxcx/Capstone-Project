@@ -1,8 +1,11 @@
 package fabiohideki.com.megagenerator.utils;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -66,17 +69,13 @@ public class Utils {
             SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
             String today = myFormat.format(new Date());
 
-            Date date1 = null;
-
-            date1 = myFormat.parse(today);
+            Date date1 = myFormat.parse(today);
 
             Date date2 = myFormat.parse(date);
 
             long diff = date2.getTime() - date1.getTime();
 
-            int dias = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-            return dias;
+            return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
         } catch (ParseException e) {
 
@@ -205,5 +204,17 @@ public class Utils {
         return null;
 
     }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
 }

@@ -55,15 +55,11 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
 
     private List<Resultado> mResults = new ArrayList<>();
 
-    private View rootView;
-
     private SearchView searchView;
 
     private ResultsRepository resultsRepository;
 
     private String mCurrentSearch;
-
-    private MenuItem mMenuItemSearch;
 
     public HistoryResultFragment() {
         // Required empty public constructor
@@ -73,7 +69,7 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_history_result, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_history_result, container, false);
         ButterKnife.bind(this, rootView);
 
         MobileAds.initialize(getContext(), getString(R.string.AdMobAppID));
@@ -144,8 +140,8 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
 
         Log.d("Fabio", "onCreateOptionsMenu: ");
         inflater.inflate(R.menu.menu_search, menu);
-        mMenuItemSearch = menu.findItem(R.id.action_search);
-        searchView = (SearchView) mMenuItemSearch.getActionView();
+        MenuItem menuItemSearch = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItemSearch.getActionView();
         searchView.setOnQueryTextListener(HistoryResultFragment.this);
         searchView.setQueryHint(mSearchHint);
         searchView.setInputType(InputType.TYPE_CLASS_NUMBER);

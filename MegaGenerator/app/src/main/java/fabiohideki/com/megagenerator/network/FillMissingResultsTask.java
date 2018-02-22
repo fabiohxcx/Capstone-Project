@@ -102,7 +102,9 @@ public class FillMissingResultsTask extends AsyncTask<Integer, String, Boolean> 
             }
         }
 
-        cursor.close();
+        if (cursor != null)
+            cursor.close();
+
         return false;
     }
 

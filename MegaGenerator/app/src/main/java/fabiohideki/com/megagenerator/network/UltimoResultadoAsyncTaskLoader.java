@@ -23,8 +23,6 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
 
     private TaskCallBack listener;
 
-    private String mUrlAPIMegasena;
-
     public UltimoResultadoAsyncTaskLoader(Context context, TaskCallBack listener) {
         super(context);
         this.listener = listener;
@@ -43,15 +41,15 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
     @Override
     public UltimoResultado loadInBackground() {
 
-        mUrlAPIMegasena = Utils.getUrlAPIMegasena();
+        String urlAPIMegasena = Utils.getUrlAPIMegasena();
 
-        Log.d("Fabio", "loadInBackground: " + mUrlAPIMegasena);
+        Log.d("Fabio", "loadInBackground: " + urlAPIMegasena);
 
-        if (mUrlAPIMegasena != null) {
+        if (urlAPIMegasena != null) {
 
             try {
 
-                Document apiDoc = Jsoup.connect(mUrlAPIMegasena)
+                Document apiDoc = Jsoup.connect(urlAPIMegasena)
                         .header("Accept-Encoding", "gzip, deflate")
                         .userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Mobile Safari/537.36")
                         .maxBodySize(0)

@@ -156,7 +156,8 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
                 ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 
                 ClipData clip = ClipData.newPlainText(resultCopied, result + " " + megaSena + ": " + resultado.getNumero() + " - " + date + ": " + resultado.getData() + " - " + numbers + ": " + resultado.getDezenas());
-                clipboard.setPrimaryClip(clip);
+                if (clipboard != null)
+                    clipboard.setPrimaryClip(clip);
 
             }
 
