@@ -371,9 +371,8 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-            Toast.makeText(context, getString(R.string.updating_location), Toast.LENGTH_SHORT).show();
             getCurrentLocation(mLastLocation);
-
+            Toast.makeText(context, getString(R.string.updating_location), Toast.LENGTH_SHORT).show();
         } else {
             requestPermissions(PERMISSIONS, REQUEST);
         }

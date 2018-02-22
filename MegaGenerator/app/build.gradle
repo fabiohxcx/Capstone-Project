@@ -1,13 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        release {
+            keyAlias 'fabiohideki'
+            keyPassword jks_password
+            storeFile file('../key.jks')
+            storePassword jks_password
+        }
+    }
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "fabiohideki.com.megagenerator"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0 - beta"
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -17,14 +27,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue 'string', 'AdMobAppID', '"ca-app-pub-3940256099942544~3347511713"'
             resValue 'string', 'AdUnitIdHome', '"ca-app-pub-3940256099942544/6300978111"'
+            signingConfig signingConfigs.release
+            applicationIdSuffix '.release'
         }
-
         debug {
             resValue 'string', 'AdMobAppID', '"ca-app-pub-3940256099942544~3347511713"'
             resValue 'string', 'AdUnitIdHome', '"ca-app-pub-3940256099942544/6300978111"'
+            versionNameSuffix ' - DEBUG'
         }
     }
-
 }
 
 repositories {
@@ -39,7 +50,7 @@ ext {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "com.android.support:design:${supportLibVersion}"
@@ -50,47 +61,34 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     //http://jakewharton.github.io/butterknife/
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //https://github.com/rhexgomez/typer
     compile 'com.elmargomez.typer:typerlib:1.0.0'
-
     //AdMob
     compile 'com.google.android.gms:play-services-ads:11.8.0'
-
     //Play Services
     implementation('com.google.android.gms:play-services:11.8.0') {
         exclude group: 'com.android.support', module: 'mediarouter-v7'
     }
-
     //https://github.com/google/gson
     compile 'com.google.code.gson:gson:2.8.2'
-
     //http://facebook.github.io/stetho/
     compile 'com.facebook.stetho:stetho:1.5.0'
-
     // jsoup HTML parser library @ https://jsoup.org/
     compile 'org.jsoup:jsoup:1.11.2'
-
     //https://github.com/yankai-victor/Loading
     compile 'com.victor:lib:1.0.4'
-
     //https://github.com/johncarl81/parceler
     compile 'org.parceler:parceler-api:1.1.9'
     annotationProcessor 'org.parceler:parceler:1.1.9'
-
     //https://github.com/L4Digital/FastScroll
     compile 'com.l4digital.fastscroll:fastscroll:1.0.4'
-
     //https://mvnrepository.com/artifact/commons-io/commons-io
-    compile group: 'commons-io', name: 'commons-io', version: '2.4'
-
+    compile 'commons-io:commons-io:2.4'
     //https://github.com/ApmeM/android-flowlayout
     compile 'org.apmem.tools:layouts:1.10@aar'
-
     //https://github.com/google/volley
     compile 'com.android.volley:volley:1.1.0'
 }
