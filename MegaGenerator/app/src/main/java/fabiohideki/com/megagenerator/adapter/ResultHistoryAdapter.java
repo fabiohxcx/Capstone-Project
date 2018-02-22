@@ -70,7 +70,7 @@ public class ResultHistoryAdapter extends RecyclerView.Adapter<ResultHistoryAdap
 
     @Override
     public String getSectionText(int position) {
-        return results.get(position).getNumero() + "";
+        return results != null ? results.get(position).getNumero() + "" : "";
     }
 
 

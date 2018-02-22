@@ -95,12 +95,25 @@ public class HistoryResultFragment extends Fragment implements SearchView.OnQuer
             mCurrentSearch = savedInstanceState.getString(INSTANCE);
 
         } else {
-            mResults = resultsRepository.listAll(getContext());
+            getAndSetResults();
+        }
 
-            if (mResults != null && mResults.size() > 0) {
-                setupRecycler();
-            }
+    }
 
+    private void getAndSetResults() {
+        mResults = resultsRepository.listAll(getContext());
+
+        if (mResults != null && mResults.size() > 0) {
+            setupRecycler();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mResults == null || mResults.size() < 1) {
+            getAndSetResults();
         }
 
     }
