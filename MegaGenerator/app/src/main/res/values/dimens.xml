@@ -25,4 +25,10 @@
     <!-- result history screen -->
     <dimen name="ball_size_small">30dp</dimen>
 
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+
 </resources>

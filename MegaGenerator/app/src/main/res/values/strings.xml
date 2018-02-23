@@ -138,6 +138,8 @@ Todas as informações são retiradas do site: <a href=\"http://loterias.caixa.g
 <p>Desenvolvido por: <a href=\"mailto:hideki.fabio@gmail.com\">Fábio Hideki</a></p>
         ]]>
     </string>
+
+    <!-- Content Descriptions -->
     <string name="logo_app_content_description">Logo do aplicativo</string>
     <string name="copy_bets_content_description">Botão para copiar apostas geradas</string>
     <string name="refused_content_description">Botão para verificar jogos gerados, mas recusados</string>
@@ -148,6 +150,10 @@ Todas as informações são retiradas do site: <a href=\"http://loterias.caixa.g
     <string name="history_copy_content_description">Botão para copiar um sorteio anterior</string>
     <string name="location_logo_content_description">Logo que representa um local</string>
     <string name="maps_link_content_description">Botão para abrir lotérica no Maps</string>
+
+    <!-- Widget -->
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>
