@@ -1,5 +1,7 @@
 package fabiohideki.com.megagenerator.network;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
@@ -14,6 +16,7 @@ import java.net.MalformedURLException;
 
 import fabiohideki.com.megagenerator.model.UltimoResultado;
 import fabiohideki.com.megagenerator.utils.Utils;
+import fabiohideki.com.megagenerator.widget.LastResultWidgetProvider;
 
 /**
  * Created by hidek on 04/02/2018.
@@ -65,6 +68,11 @@ public class UltimoResultadoAsyncTaskLoader extends AsyncTaskLoader<UltimoResult
                 UltimoResultado ultimoResultado = gson.fromJson(jsonResult, UltimoResultado.class);
 
                 Log.d("Fabio", "loadInBackground: concurso " + ultimoResultado.getNroConcurso());
+
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getContext());
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(getContext(), LastResultWidgetProvider.class));
+
+                LastResultWidgetProvider.updateLastResultWidgets(getContext(), appWidgetManager, appWidgetIds, ultimoResultado);
 
                 return ultimoResultado;
 
