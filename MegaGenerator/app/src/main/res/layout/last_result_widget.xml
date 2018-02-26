@@ -27,16 +27,6 @@
             android:src="@drawable/mega2" />
 
         <TextView
-            android:id="@+id/widget_tv_item_history_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/margin_less"
-            android:text="@string/item_title_concurso"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/widget_tv_item_result_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
