@@ -18,7 +18,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -193,9 +192,6 @@ public class Utils {
                 return baseURL + urlBuscarResultado + "?timestampAjax=" + System.currentTimeMillis();
             }
 
-        } catch (SocketException e) {
-            e.printStackTrace();
-            return null;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
