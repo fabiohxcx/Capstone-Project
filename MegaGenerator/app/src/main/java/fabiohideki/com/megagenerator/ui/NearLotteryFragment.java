@@ -61,7 +61,7 @@ import fabiohideki.com.megagenerator.utils.Utils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ActivityCompat.OnRequestPermissionsResultCallback {
+public class NearLotteryFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     @BindView(R.id.tv_your_location)
     TextView mTvYourLocation;
@@ -103,7 +103,7 @@ public class NearbyLotteryFragment extends Fragment implements GoogleApiClient.C
     private int mDistanceMetersFinal = 1000;
 
 
-    public NearbyLotteryFragment() {
+    public NearLotteryFragment() {
         // Required empty public constructor
     }
 

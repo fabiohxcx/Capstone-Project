@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     private MainFragment mMainFragment;
     private HistoryResultFragment mHistoryResultFragment;
-    private NearbyLotteryFragment mNearByLotteryFragment;
+    private NearLotteryFragment mNearByLotteryFragment;
     private GeneratorFragment mGeneratorFragment;
 
     @Override
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(mHistoryResultFragment);
 
         if (mNearByLotteryFragment == null) {
-            mNearByLotteryFragment = new NearbyLotteryFragment();
+            mNearByLotteryFragment = new NearLotteryFragment();
             mNearByLotteryFragment.setRetainInstance(true);
         }
         adapter.addFragment(mNearByLotteryFragment);
