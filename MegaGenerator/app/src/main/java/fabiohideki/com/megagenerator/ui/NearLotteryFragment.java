@@ -368,6 +368,8 @@ public class NearLotteryFragment extends Fragment implements GoogleApiClient.Con
     @OnClick(R.id.iv_update_location)
     public void refreshCurrentLocation(View view) {
 
+        mListLottery = null;
+
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
